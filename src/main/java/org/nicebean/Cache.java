@@ -1,11 +1,11 @@
 package org.nicebean;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 class Cache {
 
-  private static final Map<Class<?>, BeanModel> MODELS = new HashMap<Class<?>, BeanModel>();
+  private static final Map<Class<?>, BeanModel> MODELS = new ConcurrentHashMap<Class<?>, BeanModel>();
 
   static boolean contains(Class<?> clazz) {
     return MODELS.containsKey(clazz);
@@ -15,9 +15,8 @@ class Cache {
     return MODELS.get(clazz);
   }
 
-  static BeanModel saveAndGet(Class<?> clazz, BeanModel model) {
+  static void save(Class<?> clazz, BeanModel model) {
     MODELS.put(clazz, model);
-    return model;
   }
 
 }

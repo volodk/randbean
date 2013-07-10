@@ -11,7 +11,7 @@ public class Facade {
     if (Cache.contains(clazz)) {
       model = Cache.get(clazz);
     } else {
-      model = Cache.saveAndGet(clazz, BeanModel.describe(clazz));
+      Cache.save(clazz, model = BeanModel.describe(clazz) );
     }
 
     InstanceBuilder builder = InstanceBuilder.newInstanceBuilder(clazz);
