@@ -1,16 +1,37 @@
 package incubator;
 
-import java.util.Map;
-import java.util.Set;
 
 public class MyBean {
 
-	Set<Integer> intSet;
+//	Set<Integer> intSet;
+//	
+//	Map<Object, MyBean> map;
+//	
+	int intValue;
+	float floatValue;
 	
-	Map<Object, MyBean> map;
+	private MyBean refBean;
+	private String str;
+
+	@Override
+	public String toString() {
+		return "MyBean [intValue=" + intValue + ", floatValue=" + floatValue
+				+ ", refBean=" + refBean + ", str=" + str + "]";
+	}
 	
-	private MyBean ref;
 	
-	private int primitive;
-		
+//	
+//	@Override
+//	public String toString() {
+//		return "MyBean [intValue=" + intValue + ", fValue=" + floatValue + "]";
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "MyBean [intSet=" + intSet + ", map=" + map + ", ref=" + ref
+//				+ ", primitive=" + primitive + "]";
+//	}
+	
+	
+			
 }
