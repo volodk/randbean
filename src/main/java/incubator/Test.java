@@ -21,7 +21,8 @@ public class Test {
 		
 		Field f = clazz.getDeclaredField("myset");
 		
-			
+		System.out.println(f.getType());
+		
 		Type type = f.getGenericType();
 		
 		System.out.println(type);

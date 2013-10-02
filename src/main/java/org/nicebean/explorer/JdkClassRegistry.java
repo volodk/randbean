@@ -1,4 +1,4 @@
-package incubator;
+package org.nicebean.explorer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JdkClassRegistry {
+class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
 
 	static {

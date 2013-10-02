@@ -1,4 +1,4 @@
-package incubator;
+package org.nicebean.datagen;
 
 import java.util.Date;
 

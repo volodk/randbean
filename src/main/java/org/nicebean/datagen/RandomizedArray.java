@@ -1,4 +1,4 @@
-package incubator;
+package org.nicebean.datagen;
 
 public class RandomizedArray  extends AbstractRandomValue {
 
