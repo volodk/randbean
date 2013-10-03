@@ -1,23 +1,20 @@
 package org.nicebean.datagen;
 
-import java.util.Random;
 
 public class RandomizedPrimitive  extends AbstractRandomValue {
 
 	public RandomizedPrimitive(Class<?> clazz) {
 		super(clazz);
 	}
-
-	private static final Random rnd = new Random();
 	
 	@Override
-	public Object get() {
+	public Object generate() {
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
 				case "byte":
-					return (byte)rnd.nextInt(Integer.MAX_VALUE) & 0xFF;
+					return (byte) (rnd.nextInt(Byte.MAX_VALUE) & 0xFF);
 				case "short":
-					return (short)rnd.nextInt(Integer.MAX_VALUE) & 0xFFFF;
+					return (short) (rnd.nextInt(Short.MAX_VALUE) & 0xFFFF);
 				case "int":
 					return rnd.nextInt();
 				case "long":
@@ -27,7 +24,12 @@ public class RandomizedPrimitive  extends AbstractRandomValue {
 				case "double":
 					return rnd.nextDouble();
 				case "char":
-					return (char)rnd.nextInt(Integer.MAX_VALUE) & 0xFFFF;
+					char ch = 0;
+					do {
+						ch = (char) ( 'A' + rnd.nextInt('z' - 'A' + 1));
+					} while( ch > 'Z' && ch < 'a' );
+					
+					return ch;
 				case "boolean":
 					return rnd.nextBoolean();
 			}

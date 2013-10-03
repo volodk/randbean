@@ -19,27 +19,35 @@ class JdkClassRegistry {
 				try {
 					String str = null;
 					while ((str = br.readLine()) != null) {
-						String className = str.replace('/', '.');
-						try{
-							Class<?> clazz = Class.forName(className);
-							
-							registry.add(clazz);
-							
-						} catch(ClassNotFoundException e){
-							System.err.println("Cannot find class definition, see more : " + e.getMessage());
+						if (! ( str.startsWith("#") || str.startsWith("sun")) ) {
+							String className = str.replace('/', '.');
+							try {
+								Class<?> clazz = Class.forName(className);
+
+								registry.add(clazz);
+
+							} catch (ClassNotFoundException e) {
+								System.err
+										.println("Cannot find class definition, see more : "
+												+ e.getMessage());
+							} catch (Throwable e) {
+								// ignore
+							}
 						}
 					}
 				} finally {
 					br.close();
 				}
 			} catch (IOException e) {
-				System.err.println("Cannot read from file, reason :" + e.getMessage());
+				System.err.println("Cannot read from file, reason :"
+						+ e.getMessage());
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("Cannot find lib/classlist file. Please check your 'java.home' property");
+			System.err
+					.println("Cannot find lib/classlist file. Please check your 'java.home' property");
 		}
 	}
-	
+
 	static {
 		registry.add(byte.class);
 		registry.add(short.class);
@@ -50,8 +58,8 @@ class JdkClassRegistry {
 		registry.add(char.class);
 		registry.add(boolean.class);
 	}
-	
-	public static boolean isJdkClass(Class<?> clazz){
+
+	public static boolean isJdkClass(Class<?> clazz) {
 		return registry.contains(clazz);
 	}
 }

@@ -1,8 +1,6 @@
 package org.nicebean.test;
 
-import static org.junit.Assert.fail;
-
-import java.util.Set;
+import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,23 +8,33 @@ import org.nicebean.Nice;
 import org.nicebean.junit.NiceBeanRunner;
 
 @RunWith(NiceBeanRunner.class)
-public class SampleTest {
+public class NiceBeanTest {
 
   public static class Person {
     private String name;
     private int age;
-    private Person dady, mom;
-    private Set<Person> children;
+    private Person friend;
+//    private Set<Person> children;
+    
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + ", friend=" + friend
+				+ "]";
+	}
 
     // add here default or null-argument constructor + getters & setters
   }
 
-  @Nice
+  @Nice(recursiveDepth = 2)
   Person $4test;
 
   @Test
   public void test() {
-    fail("Not yet implemented");
+    
+	  Assert.assertNotNull($4test);
+	  
+	  System.out.println($4test);
+	  
   }
 
 }

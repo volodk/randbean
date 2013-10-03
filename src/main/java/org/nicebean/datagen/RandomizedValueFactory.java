@@ -41,9 +41,9 @@ public class RandomizedValueFactory {
 		factories.put(Map.class, new RandomizedMap(Map.class));
 	}
 	
-	private static final RandomizedValue DEFAULT_OBJECT_VALUE = new RandomizedValue(){
+	private static final RandomizedValue NULL_OBJECT_VALUE = new RandomizedValue(){
 		@Override
-		public Object get() {
+		public Object generate() {
 			return null;
 		}
 	};
@@ -52,7 +52,7 @@ public class RandomizedValueFactory {
 		if(factories.containsKey(clazz)){
 			return factories.get(clazz);
 		} else {
-			return DEFAULT_OBJECT_VALUE;
+			return NULL_OBJECT_VALUE;
 		}
 	}
 }

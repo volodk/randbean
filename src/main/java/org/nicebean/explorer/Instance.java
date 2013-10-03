@@ -1,6 +1,6 @@
 package org.nicebean.explorer;
 
-import org.nicebean.ReflectionUtils;
+import org.nicebean.Utils;
 import org.nicebean.datagen.RandomizedValue;
 import org.nicebean.datagen.RandomizedValueFactory;
 
@@ -14,7 +14,7 @@ public class Instance {
 				
 				RandomizedValue rv = RandomizedValueFactory.resolve( node.getClassType() );
 				
-				return rv.get();
+				return rv.generate();
 				
 			} else {
 				try{
@@ -24,7 +24,7 @@ public class Instance {
 					
 						Object value = newObject(element);
 						
-						ReflectionUtils.set( element.getClassField(), ref, value);
+						Utils.setSilently( element.getClassField(), ref, value);
 					}
 					return ref;
 					

@@ -9,7 +9,7 @@ public class RandomizedCollection extends AbstractRandomValue {
 	}
 
 	@Override
-	public Object get() {
+	public Object generate() {
 		
 		if( clazz != null && Collection.class.isAssignableFrom(clazz) ){
 			

@@ -10,7 +10,7 @@ public class RandomizedDate extends AbstractRandomValue {
 	}
 
 	@Override
-	public Object get() {
+	public Object generate() {
 		if( clazz!= null && Date.class.isAssignableFrom(clazz) ){
 			return new Date();
 		} else{

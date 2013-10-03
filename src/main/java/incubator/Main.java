@@ -4,7 +4,30 @@ import org.nicebean.explorer.Explorer;
 import org.nicebean.explorer.Instance;
 import org.nicebean.explorer.Node;
 
+
 public class Main {
+	
+	public static class MyBean {
+
+//		Set<Integer> intSet;
+	//	
+//		Map<Object, MyBean> map;
+	//	
+		byte byteValue;
+		int intValue;
+		float floatValue;
+		
+		private MyBean refBean;
+		private String str;
+
+		@Override
+		public String toString() {
+			return "MyBean [byteValue=" + byteValue + ", intValue=" + intValue
+					+ ", floatValue=" + floatValue + ", refBean=" + refBean
+					+ ", str=" + str + "]";
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -16,7 +39,7 @@ public class Main {
 
 	static MyBean newObject(Class<MyBean> clazz) {
 		
-		int max_depth = 3;
+		int max_depth = 2;
 		
 		Node root = Explorer.buildReferenceGraph(clazz, max_depth);
 		
