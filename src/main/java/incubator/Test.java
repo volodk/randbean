@@ -1,10 +1,8 @@
 package incubator;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,9 +21,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
-//		Object[][][][][] buff = new Object[7][9][2][1][100];
-		
-		System.out.println(Arrays.toString(Utils.countArrayDimentions(buff)));
+		System.out.println(Utils.countArrayDimensions(Object[][][][][].class));
 		
 	
 		Class<?> clazz = Test.class;

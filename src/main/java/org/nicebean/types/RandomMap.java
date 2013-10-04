@@ -1,10 +1,10 @@
-package org.nicebean.datagen;
+package org.nicebean.types;
 
 import java.util.Map;
 
-public class RandomizedMap  extends AbstractRandomValue {
+public class RandomMap  extends AbstractValue {
 
-	public RandomizedMap(Class<?> clazz) {
+	public RandomMap(Class<?> clazz) {
 		super(clazz);
 	}
 

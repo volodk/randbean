@@ -1,10 +1,10 @@
-package org.nicebean.datagen;
+package org.nicebean.types;
 
 import java.util.Date;
 
-public class RandomizedDate extends AbstractRandomValue {
+public class RandomDate extends AbstractValue {
 
-	public RandomizedDate(Class<?> clazz) {
+	public RandomDate(Class<?> clazz) {
 		super(clazz);
 		// TODO Auto-generated constructor stub
 	}

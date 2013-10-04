@@ -1,9 +1,9 @@
-package org.nicebean.datagen;
+package org.nicebean.types;
 
 
-public class RandomizedPrimitive  extends AbstractRandomValue {
+public class RandomPrimitive  extends AbstractValue {
 
-	public RandomizedPrimitive(Class<?> clazz) {
+	public RandomPrimitive(Class<?> clazz) {
 		super(clazz);
 	}
 	

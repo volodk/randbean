@@ -57,6 +57,33 @@ class JdkClassRegistry {
 		registry.add(double.class);
 		registry.add(char.class);
 		registry.add(boolean.class);
+		
+		registry.add(byte[].class);
+		registry.add(short[].class);
+		registry.add(int[].class);
+		registry.add(long[].class);
+		registry.add(float[].class);
+		registry.add(double[].class);
+		registry.add(char[].class);
+		registry.add(boolean[].class);
+		
+		registry.add(byte[][].class);
+		registry.add(short[][].class);
+		registry.add(int[][].class);
+		registry.add(long[][].class);
+		registry.add(float[][].class);
+		registry.add(double[][].class);
+		registry.add(char[][].class);
+		registry.add(boolean[][].class);
+		
+		registry.add(byte[][][].class);
+		registry.add(short[][][].class);
+		registry.add(int[][][].class);
+		registry.add(long[][][].class);
+		registry.add(float[][][].class);
+		registry.add(double[][][].class);
+		registry.add(char[][][].class);
+		registry.add(boolean[][][].class);
 	}
 
 	public static boolean isJdkClass(Class<?> clazz) {

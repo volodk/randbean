@@ -1,12 +1,10 @@
-package org.nicebean.datagen;
+package org.nicebean.types;
 
-
-
-public class RandomizedString extends AbstractRandomValue {
+public class RandomString extends AbstractValue {
 	
 	private static final int MAX_LENTH = 25;
 
-	public RandomizedString(Class<?> clazz) {
+	public RandomString(Class<?> clazz) {
 		super(clazz);
 	}
 

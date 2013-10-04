@@ -1,10 +1,10 @@
-package org.nicebean.datagen;
+package org.nicebean.types;
 
 import java.util.Collection;
 
-public class RandomizedCollection extends AbstractRandomValue {
+public class RandomCollection extends AbstractValue {
 
-	public RandomizedCollection(Class<?> clazz) {
+	public RandomCollection(Class<?> clazz) {
 		super(clazz);
 	}
 

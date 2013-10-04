@@ -1,8 +1,8 @@
 package org.nicebean.explorer;
 
 import org.nicebean.Utils;
-import org.nicebean.datagen.RandomizedValue;
-import org.nicebean.datagen.RandomizedValueFactory;
+import org.nicebean.types.ValueFactory;
+import org.nicebean.types.ValueFactory.RandomValue;
 
 public class Instance {
 	
@@ -12,7 +12,7 @@ public class Instance {
 			
 			if( node.isLeaf() ){
 				
-				RandomizedValue rv = RandomizedValueFactory.resolve( node.getClassType() );
+				RandomValue rv = ValueFactory.resolve( node.getClassType() );
 				
 				return rv.generate();
 				
