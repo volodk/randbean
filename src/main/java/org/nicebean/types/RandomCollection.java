@@ -4,13 +4,12 @@ import java.util.Collection;
 
 public class RandomCollection extends AbstractValue {
 
-	public RandomCollection(Class<?> clazz) {
-		super(clazz);
+	public RandomCollection(Class<?> clazz, boolean container) {
+		super(clazz, container);
 	}
 
 	@Override
 	public Object generate() {
-		
 		if( clazz != null && Collection.class.isAssignableFrom(clazz) ){
 			
 		} else{

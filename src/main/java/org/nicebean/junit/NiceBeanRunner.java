@@ -9,7 +9,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.nicebean.Nice;
-import org.nicebean.Utils;
+import org.nicebean.BeanUtils;
 import org.nicebean.explorer.Explorer;
 import org.nicebean.explorer.Instance;
 import org.nicebean.explorer.Node;
@@ -45,7 +45,7 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 			Node root = Explorer.buildReferenceGraph(fieldClass, maxDepth);
 			value = Instance.newObject(root);
 			
-			Utils.setSilently(field.getField(), test, value);
+			BeanUtils.setSilently(field.getField(), test, value);
 		}
 	}
 

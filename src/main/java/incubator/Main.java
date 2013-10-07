@@ -22,7 +22,7 @@ public class Main {
 //		private MyBean refBean;
 //		private String str;
 		
-		private int[][] array;
+		private int[] array;
 
 		@Override
 		public String toString() {

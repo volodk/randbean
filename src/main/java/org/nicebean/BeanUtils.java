@@ -2,7 +2,7 @@ package org.nicebean;
 
 import java.lang.reflect.Field;
 
-public class Utils {
+public class BeanUtils {
 	
 	public static void setSilently(Field field, Object instance, Object value){
 		boolean wflag = field.isAccessible();
@@ -15,15 +15,8 @@ public class Utils {
 		field.setAccessible(wflag);
 	}
 	
-	public static int countArrayDimensions( Class<?> clazz ){
-		if( clazz.isArray() ){
-			int d = 0;
-			for( char ch : clazz.toString().toCharArray() ){
-				d += (ch == '[') ? 1 : 0;
-			}
-			return d;
-		} else {
-			throw new IllegalArgumentException("Not an array, class :" + clazz); 
-		}
+	public static Object newInstance( Class<?> clazz ) throws InstantiationException, IllegalAccessException{
+		return clazz.newInstance();
 	}
+	
 }

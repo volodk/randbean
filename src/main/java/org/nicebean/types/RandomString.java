@@ -4,13 +4,13 @@ public class RandomString extends AbstractValue {
 	
 	private static final int MAX_LENTH = 25;
 
-	public RandomString(Class<?> clazz) {
-		super(clazz);
+	public RandomString(Class<?> clazz, boolean container) {
+		super(clazz, container);
 	}
 
 	@Override
 	public Object generate() {
-		if( clazz!= null && String.class.isAssignableFrom(clazz) ){
+		if( clazz != null && String.class.isAssignableFrom(clazz) ){
 			int length = rnd.nextInt(MAX_LENTH);
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){

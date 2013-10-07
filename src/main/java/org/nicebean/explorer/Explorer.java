@@ -9,8 +9,7 @@ public class Explorer {
 		return buildReferenceGraph(rootClazz, null, 0, maxDepth);
 	}
 
-	private static Node buildReferenceGraph(Class<?> clazz, Field classField,
-			int depth, int max_depth) {
+	private static Node buildReferenceGraph(Class<?> clazz, Field classField, int depth, int max_depth) {
 		
 		if (depth <= max_depth) {
 			
@@ -24,8 +23,7 @@ public class Explorer {
 				
 				for (Field f : clazz.getDeclaredFields()) {
 					
-					Node child = buildReferenceGraph(f.getType(), f,
-							depth + 1, max_depth);
+					Node child = buildReferenceGraph(f.getType(), f, depth + 1, max_depth);
 			
 					if (child != null)
 						node.addElement(child);

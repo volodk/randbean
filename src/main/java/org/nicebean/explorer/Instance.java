@@ -1,6 +1,6 @@
 package org.nicebean.explorer;
 
-import org.nicebean.Utils;
+import org.nicebean.BeanUtils;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
 
@@ -17,14 +17,15 @@ public class Instance {
 				return rv.generate();
 				
 			} else {
+				
 				try{
-					Object ref = node.getClassType().newInstance();
+					Object ref = BeanUtils.newInstance( node.getClassType() );
 					
 					for( Node element : node.getElements() ){
 					
 						Object value = newObject(element);
 						
-						Utils.setSilently( element.getClassField(), ref, value);
+						BeanUtils.setSilently( element.getClassField(), ref, value);
 					}
 					return ref;
 					

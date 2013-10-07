@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.nicebean.ArrayUtils;
+
 class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
 
@@ -57,36 +59,9 @@ class JdkClassRegistry {
 		registry.add(double.class);
 		registry.add(char.class);
 		registry.add(boolean.class);
-		
-		registry.add(byte[].class);
-		registry.add(short[].class);
-		registry.add(int[].class);
-		registry.add(long[].class);
-		registry.add(float[].class);
-		registry.add(double[].class);
-		registry.add(char[].class);
-		registry.add(boolean[].class);
-		
-		registry.add(byte[][].class);
-		registry.add(short[][].class);
-		registry.add(int[][].class);
-		registry.add(long[][].class);
-		registry.add(float[][].class);
-		registry.add(double[][].class);
-		registry.add(char[][].class);
-		registry.add(boolean[][].class);
-		
-		registry.add(byte[][][].class);
-		registry.add(short[][][].class);
-		registry.add(int[][][].class);
-		registry.add(long[][][].class);
-		registry.add(float[][][].class);
-		registry.add(double[][][].class);
-		registry.add(char[][][].class);
-		registry.add(boolean[][][].class);
 	}
 
 	public static boolean isJdkClass(Class<?> clazz) {
-		return registry.contains(clazz);
+		return registry.contains(clazz) || registry.contains( ArrayUtils.getComponentType(clazz) );
 	}
 }

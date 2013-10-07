@@ -3,8 +3,8 @@ package org.nicebean.types;
 
 public class RandomPrimitive  extends AbstractValue {
 
-	public RandomPrimitive(Class<?> clazz) {
-		super(clazz);
+	public RandomPrimitive(Class<?> clazz, boolean container) {
+		super(clazz, container);
 	}
 	
 	@Override
