@@ -1,17 +1,19 @@
 package org.nicebean.types;
 
-public class RandomString extends AbstractValue {
-	
-	private static final int MAX_LENTH = 25;
+import org.nicebean.annotations.Works;
 
-	public RandomString(Class<?> clazz, boolean container) {
-		super(clazz, container);
+@Works(with = String.class)
+public class RandomString extends AbstractValue {
+
+	public RandomString(Class<?> clazz) {
+		super(clazz);
 	}
 
 	@Override
-	public Object generate() {
+	public Object generate( Size s ) {
+		
 		if( clazz != null && String.class.isAssignableFrom(clazz) ){
-			int length = rnd.nextInt(MAX_LENTH);
+			int length = rnd.nextInt( s.value() );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){
 				char ch = 0;
@@ -25,6 +27,7 @@ public class RandomString extends AbstractValue {
 			System.err.println("Is not a String");
 		}
 		return null;
+		
 	}
 
 }

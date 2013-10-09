@@ -1,4 +1,4 @@
-package org.nicebean;
+package org.nicebean.utils;
 
 public class ArrayUtils {
 	

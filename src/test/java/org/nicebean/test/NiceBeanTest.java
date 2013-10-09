@@ -4,8 +4,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nicebean.Nice;
+import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
+import org.nicebean.types.ValueFactory.RandomValue.Size;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -25,7 +26,7 @@ public class NiceBeanTest {
     // add here default or null-argument constructor + getters & setters
   }
 
-  @Nice(recursiveDepth = 2)
+  @Nice(size = Size.DEEP)
   Person $4test;
 
   @Test

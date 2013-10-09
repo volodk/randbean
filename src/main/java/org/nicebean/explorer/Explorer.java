@@ -15,7 +15,7 @@ public class Explorer {
 			
 			Node node = new Node(clazz, classField);
 			
-			if ( JdkClassRegistry.isJdkClass(clazz) ) {
+			if ( isJdkClass(clazz) ) {
 				
 				node.markAsLeaf();
 				
@@ -37,5 +37,9 @@ public class Explorer {
 			
 		}
 		return null;
+	}
+
+	private static boolean isJdkClass(Class<?> clazz) {
+		return JdkClassRegistry.isJdkClass(clazz);
 	}
 }

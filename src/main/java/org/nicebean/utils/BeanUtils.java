@@ -1,4 +1,4 @@
-package org.nicebean;
+package org.nicebean.utils;
 
 import java.lang.reflect.Field;
 
@@ -16,6 +16,7 @@ public class BeanUtils {
 	}
 	
 	public static Object newInstance( Class<?> clazz ) throws InstantiationException, IllegalAccessException{
+		
 		return clazz.newInstance();
 	}
 	

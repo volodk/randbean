@@ -1,14 +1,17 @@
 package org.nicebean.types;
 
+import org.nicebean.annotations.Works;
 
-public class RandomPrimitive  extends AbstractValue {
+@Works(with = { boolean.class, byte.class, short.class, char.class, int.class,
+		long.class, float.class, double.class })
+public class RandomPrimitive extends AbstractValue {
 
-	public RandomPrimitive(Class<?> clazz, boolean container) {
-		super(clazz, container);
+	public RandomPrimitive(Class<?> clazz) {
+		super(clazz);
 	}
 	
 	@Override
-	public Object generate() {
+	public Object generate(/*ignore*/ Size s) {
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
 				case "byte":

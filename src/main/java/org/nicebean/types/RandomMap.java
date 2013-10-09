@@ -2,14 +2,18 @@ package org.nicebean.types;
 
 import java.util.Map;
 
-public class RandomMap  extends AbstractValue {
+import org.nicebean.annotations.Works;
 
-	public RandomMap(Class<?> clazz, boolean container) {
-		super(clazz, container);
+@Works( with = Map.class )
+public class RandomMap extends AbstractValue {
+
+	public RandomMap(Class<?> clazz) {
+		super(clazz);
 	}
 
 	@Override
-	public Object generate() {
+	public Object generate(Size s) {
+		
 		if( clazz != null && Map.class.isAssignableFrom(clazz) ){
 			 
 		} else{

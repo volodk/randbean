@@ -8,11 +8,10 @@ import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-import org.nicebean.Nice;
-import org.nicebean.BeanUtils;
-import org.nicebean.explorer.Explorer;
-import org.nicebean.explorer.Instance;
-import org.nicebean.explorer.Node;
+import org.nicebean.annotations.Nice;
+import org.nicebean.types.ValueFactory;
+import org.nicebean.types.ValueFactory.RandomValue;
+import org.nicebean.utils.BeanUtils;
 
 public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 
@@ -37,20 +36,19 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 		
 		for (FrameworkField field : fields) {
 			
-			Object value;
 			Class<?> fieldClass = field.getField().getType();
 			
-			int maxDepth = resolveMaxRecursiveDepth(field.getAnnotations());
+			RandomValue.Size depth = resolveMaxRecursiveDepth(field.getAnnotations());
 			
-			Node root = Explorer.buildReferenceGraph(fieldClass, maxDepth);
-			value = Instance.newObject(root);
+			RandomValue rv = ValueFactory.resolve(fieldClass);
+			Object value = rv.generate( depth );
 			
 			BeanUtils.setSilently(field.getField(), test, value);
 		}
 	}
 
-	private int resolveMaxRecursiveDepth(Annotation[] annotations) {
-		return ( (Nice)annotations[0] ).recursiveDepth();
+	private RandomValue.Size resolveMaxRecursiveDepth(Annotation[] annotations) {
+		return ( (Nice)annotations[0] ).size();
 	}
 
 }

@@ -3,7 +3,7 @@ package org.nicebean.test;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nicebean.Nice;
+import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
 
 @RunWith(NiceBeanRunner.class)

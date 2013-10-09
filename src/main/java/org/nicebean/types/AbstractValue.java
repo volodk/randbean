@@ -9,15 +9,8 @@ public abstract class AbstractValue implements RandomValue {
 	protected final Random rnd = new Random( System.currentTimeMillis() );
 	
 	protected Class<?> clazz;
-	private boolean container;
 	
-	public AbstractValue(Class<?> clazz, boolean container) {
+	public AbstractValue(Class<?> clazz) {
 		this.clazz = clazz;
-		this.container = container;
-	}
-	
-	@Override
-	public boolean isComplex() {
-		return container;
 	}
 }

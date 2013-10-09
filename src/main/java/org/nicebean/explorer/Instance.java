@@ -1,8 +1,9 @@
 package org.nicebean.explorer;
 
-import org.nicebean.BeanUtils;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
+import org.nicebean.types.ValueFactory.RandomValue.Size;
+import org.nicebean.utils.BeanUtils;
 
 public class Instance {
 	
@@ -13,8 +14,7 @@ public class Instance {
 			if( node.isLeaf() ){
 				
 				RandomValue rv = ValueFactory.resolve( node.getClassType() );
-				
-				return rv.generate();
+				return rv.generate( Size.SHALLOW );
 				
 			} else {
 				

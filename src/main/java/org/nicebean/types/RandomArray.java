@@ -3,27 +3,27 @@ package org.nicebean.types;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-import org.nicebean.ArrayUtils;
+import org.nicebean.annotations.Works;
 import org.nicebean.types.ValueFactory.RandomValue;
+import org.nicebean.utils.ArrayUtils;
 
+@Works(with = {Object[].class})
 public class RandomArray extends AbstractValue {
 	
-	public RandomArray(Class<?> clazz, boolean container) {
-		super(clazz, container);
+	public RandomArray(Class<?> clazz) {
+		super(clazz );
 	}
 
 	@Override
-	public Object generate() {
+	public Object generate( Size s ) {
 		
 		if( clazz != null && clazz.isArray() ){
-			
-			int MAX_LENGTH = 5;
 			
 			int d = ArrayUtils.countArrayDimensions(clazz);
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( MAX_LENGTH - 1 );	// avoid zero-length arrays
+				dimensions[i] = 1 + rnd.nextInt( s.value() );	// TODO: how to handle zero size array ?
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);
@@ -54,7 +54,7 @@ public class RandomArray extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate();
+			return rv.generate( Size.SHALLOW );
 		}
 		
 	}

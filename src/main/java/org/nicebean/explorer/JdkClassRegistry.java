@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.nicebean.ArrayUtils;
+import org.nicebean.utils.ArrayUtils;
 
 class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
