@@ -1,7 +1,7 @@
 package org.nicebean.types;
 
 import org.nicebean.explorer.Explorer;
-import org.nicebean.explorer.Instance;
+import org.nicebean.explorer.Builder;
 import org.nicebean.explorer.Node;
 
 public class RandomPlainBean extends AbstractValue {
@@ -11,8 +11,8 @@ public class RandomPlainBean extends AbstractValue {
 	}
 
 	@Override
-	public Object generate(Size s) {
+	public Object generate(DetailLevel s) {
 		Node root = Explorer.buildReferenceGraph(clazz, s.value());
-		return Instance.newObject(root);
+		return Builder.newInstance(root);
 	}
 }

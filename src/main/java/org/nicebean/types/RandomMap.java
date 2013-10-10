@@ -1,5 +1,6 @@
 package org.nicebean.types;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 import org.nicebean.annotations.Works;
@@ -7,12 +8,15 @@ import org.nicebean.annotations.Works;
 @Works( with = Map.class )
 public class RandomMap extends AbstractValue {
 
-	public RandomMap(Class<?> clazz) {
+	private Type genericType;
+	
+	public RandomMap(Class<?> clazz, Type genericType) {
 		super(clazz);
+		this.genericType = genericType;
 	}
 
 	@Override
-	public Object generate(Size s) {
+	public Object generate(DetailLevel s) {
 		
 		if( clazz != null && Map.class.isAssignableFrom(clazz) ){
 			 

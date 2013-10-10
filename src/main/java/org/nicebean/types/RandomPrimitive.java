@@ -11,7 +11,7 @@ public class RandomPrimitive extends AbstractValue {
 	}
 	
 	@Override
-	public Object generate(/*ignore*/ Size s) {
+	public Object generate(/*ignore*/ DetailLevel s) {
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
 				case "byte":

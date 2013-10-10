@@ -12,7 +12,7 @@ public class RandomDate extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( /*ignore*/ Size s ) {
+	public Object generate( /*ignore*/ DetailLevel s ) {
 		if( clazz != null && Date.class.isAssignableFrom(clazz) ){
 			try {
 				return clazz.newInstance();

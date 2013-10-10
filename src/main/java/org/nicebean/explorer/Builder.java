@@ -2,30 +2,33 @@ package org.nicebean.explorer;
 
 import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
-import org.nicebean.types.ValueFactory.RandomValue.Size;
+import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;
 import org.nicebean.utils.BeanUtils;
 
-public class Instance {
+public class Builder {
 	
-	public static Object newObject(Node node) {
+	public static Object newInstance(Node node) {
 		
 		if ( node != null ){
 			
+			Class<?> classType = node.getClassType();
+			
 			if( node.isLeaf() ){
 				
-				RandomValue rv = ValueFactory.resolve( node.getClassType() );
-				return rv.generate( Size.SHALLOW );
+				RandomValue rv = ValueFactory.resolve( classType, node.getField().getGenericType() );
+				
+				return rv.generate( DetailLevel.SHALLOW );
 				
 			} else {
 				
 				try{
-					Object ref = BeanUtils.newInstance( node.getClassType() );
+					Object ref = BeanUtils.newInstance( classType );
 					
 					for( Node element : node.getElements() ){
 					
-						Object value = newObject(element);
+						Object value = newInstance(element);
 						
-						BeanUtils.setSilently( element.getClassField(), ref, value);
+						BeanUtils.setSilently( element.getField(), ref, value);
 					}
 					return ref;
 					

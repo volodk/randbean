@@ -1,6 +1,7 @@
 package org.nicebean.junit;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -34,21 +35,22 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 
 	protected void populateNiceObjects(Object test) {
 		
-		for (FrameworkField field : fields) {
+		for (FrameworkField ff : fields) {
 			
-			Class<?> fieldClass = field.getField().getType();
+			Field fieldObject = ff.getField();
+			Class<?> fieldClass = fieldObject.getType();
 			
-			RandomValue.Size depth = resolveMaxRecursiveDepth(field.getAnnotations());
+			RandomValue.DetailLevel details = howDeepDoesTheRabbitHoleGo(ff.getAnnotations());
 			
-			RandomValue rv = ValueFactory.resolve(fieldClass);
-			Object value = rv.generate( depth );
+			RandomValue rv = ValueFactory.resolve(fieldClass, fieldObject.getGenericType() );
+			Object value = rv.generate( details );
 			
-			BeanUtils.setSilently(field.getField(), test, value);
+			BeanUtils.setSilently(fieldObject, test, value);
 		}
 	}
 
-	private RandomValue.Size resolveMaxRecursiveDepth(Annotation[] annotations) {
-		return ( (Nice)annotations[0] ).size();
+	private RandomValue.DetailLevel howDeepDoesTheRabbitHoleGo(Annotation[] annotations) {
+		return ( (Nice)annotations[0] ).level();
 	}
 
 }

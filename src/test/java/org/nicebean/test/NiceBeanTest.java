@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
-import org.nicebean.types.ValueFactory.RandomValue.Size;
+import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -26,7 +26,7 @@ public class NiceBeanTest {
     // add here default or null-argument constructor + getters & setters
   }
 
-  @Nice(size = Size.DEEP)
+  @Nice(level = DetailLevel.DEEP)
   Person $4test;
 
   @Test

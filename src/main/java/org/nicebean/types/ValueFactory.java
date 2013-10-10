@@ -1,5 +1,6 @@
 package org.nicebean.types;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,18 +9,20 @@ import java.util.Map;
 public class ValueFactory {
 	
 	public interface RandomValue {
-		enum Size {
+		
+		enum DetailLevel {
 			SHALLOW(1), DEEP(10);
 			
 			int depth;
-			private Size(int d){
+			private DetailLevel(int d){
 				depth = d;
 			}
 			public int value(){
 				return depth;
 			}
 		}
-		Object generate(Size d);
+		
+		Object generate(DetailLevel d);
 	}
 	
 	private static final Map<Class<?>, RandomValue> factories = new HashMap<>();
@@ -32,32 +35,31 @@ public class ValueFactory {
 	
 	private static final RandomValue NULL_OBJECT_VALUE = new RandomValue(){
 		@Override
-		public Object generate(Size d) {
+		public Object generate(DetailLevel d) {
 			return null;
 		}
 	};
 	
-	public static RandomValue resolve(Class<?> clazz){
+	public static RandomValue resolve(Class<?> clazz, Type genericType){
 		
 		RandomValue rv = NULL_OBJECT_VALUE;
 		
 		if( clazz != null ){
 			
 			// if is interface
-			
-			if ( clazz.isArray() ){
-				rv = new RandomArray(clazz);
-				
-			} else if(clazz.isPrimitive()){
+			if(clazz.isPrimitive()){
 				rv = new RandomPrimitive(clazz);
 				
-			} else if(Collection.class.isAssignableFrom(clazz)){
-				rv = new RandomCollection(clazz);
+			} else if ( clazz.isArray() ){
+				rv = new RandomArray(clazz, genericType);
 				
-			} else if(Map.class.isAssignableFrom(clazz)){
-				rv = new RandomMap(clazz);
+			} else if (Collection.class.isAssignableFrom(clazz)){
+				rv = new RandomCollection(clazz, genericType);
 				
-			} else if(factories.containsKey(clazz)){
+			} else if (Map.class.isAssignableFrom(clazz)){
+				rv = new RandomMap(clazz, genericType);
+				
+			} else if (factories.containsKey(clazz)){
 				rv = factories.get(clazz);
 				
 			} else {
@@ -67,4 +69,5 @@ public class ValueFactory {
 		
 		return rv;
 	}
+
 }

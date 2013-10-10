@@ -3,7 +3,7 @@ package incubator;
 import java.util.Arrays;
 
 import org.nicebean.explorer.Explorer;
-import org.nicebean.explorer.Instance;
+import org.nicebean.explorer.Builder;
 import org.nicebean.explorer.Node;
 
 
@@ -55,7 +55,7 @@ public class Main {
 		
 		Node root = Explorer.buildReferenceGraph(clazz, max_depth);
 		
-		Object reference = Instance.newObject(root);
+		Object reference = Builder.newInstance(root);
 		
 		return clazz.cast(reference);
 	}

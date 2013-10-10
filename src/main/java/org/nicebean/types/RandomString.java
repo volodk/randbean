@@ -10,7 +10,7 @@ public class RandomString extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( Size s ) {
+	public Object generate( DetailLevel s ) {
 		
 		if( clazz != null && String.class.isAssignableFrom(clazz) ){
 			int length = rnd.nextInt( s.value() );

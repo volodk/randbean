@@ -1,6 +1,7 @@
 package org.nicebean.types;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 import org.nicebean.annotations.Works;
@@ -10,12 +11,15 @@ import org.nicebean.utils.ArrayUtils;
 @Works(with = {Object[].class})
 public class RandomArray extends AbstractValue {
 	
-	public RandomArray(Class<?> clazz) {
+	private Type genericType;
+	
+	public RandomArray(Class<?> clazz, Type genericType) {
 		super(clazz );
+		this.genericType = genericType;
 	}
 
 	@Override
-	public Object generate( Size s ) {
+	public Object generate( DetailLevel s ) {
 		
 		if( clazz != null && clazz.isArray() ){
 			
@@ -23,12 +27,12 @@ public class RandomArray extends AbstractValue {
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( s.value() );	// TODO: how to handle zero size array ?
+				dimensions[i] = 1 + rnd.nextInt( s.value() );
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);
 			
-			RandomValue rv = ValueFactory.resolve(componentType);
+			RandomValue rv = ValueFactory.resolve(componentType, genericType);
 			
 			return fill( componentType, rv, dimensions, 0, d );
 			
@@ -54,7 +58,7 @@ public class RandomArray extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate( Size.SHALLOW );
+			return rv.generate( DetailLevel.SHALLOW );
 		}
 		
 	}

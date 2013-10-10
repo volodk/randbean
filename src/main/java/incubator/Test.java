@@ -14,6 +14,8 @@ public class Test {
 	
 	Set<Integer> myset;
 	
+	int f;
+	
 	Map<?,?> mymap2;
 	
 	public Test() {
@@ -22,13 +24,16 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
+		long ans = Integer.MAX_VALUE * Integer.MAX_VALUE;
+		System.out.println(ans);
+		
 	
 		Collection<?>[][][][][][][][] a = {};
 		
 		System.out.println(a instanceof Object[] );
 		
 		
-		Field f = Test.class.getDeclaredField("myset");
+		Field f = Test.class.getDeclaredField("f");
 		System.out.println(f.getType());
 		Type type = f.getGenericType();
 		System.out.println(type);
@@ -39,6 +44,7 @@ public class Test {
 				System.out.println(t);
 			}
 		}
+		
 		
 		
 		

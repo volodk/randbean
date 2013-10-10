@@ -11,13 +11,16 @@ import org.nicebean.utils.BeanUtils;
 
 @Works(with = {Collection.class, List.class, Set.class})
 public class RandomCollection extends AbstractValue {
+	
+	private Type genericType;
 
-	public RandomCollection(Class<?> clazz) {
+	public RandomCollection(Class<?> clazz, Type genericType) {
 		super(clazz);
+		this.genericType = genericType;
 	}
 
 	@Override
-	public Object generate(Size s) {
+	public Object generate(DetailLevel s) {
 		if( clazz != null && Collection.class.isAssignableFrom(clazz) ){
 			
 			try {
@@ -25,12 +28,12 @@ public class RandomCollection extends AbstractValue {
 				Object collection = BeanUtils.newInstance(clazz);	// TODO cannot instantiate interface
 				
 				Class<?> classType = getElementClassType(clazz);
-				RandomValue rv = ValueFactory.resolve(classType);
+				RandomValue rv = ValueFactory.resolve(classType, genericType);
 				
 				int size = rnd.nextInt( s.value() );
 				while( size-- >0 ){
 
-					Object element = rv.generate( Size.SHALLOW );
+					Object element = rv.generate( DetailLevel.SHALLOW );
 					
 //					( (Collection) collection ).add( element );
 				}

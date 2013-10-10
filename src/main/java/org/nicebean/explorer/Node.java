@@ -11,20 +11,16 @@ public class Node {
 	private Class<?> clazz;
 	private List<Node> elements = new LinkedList<>();
 	
-	public Node(Class<?> clazz, Field field){
+	public Node(Field field){
 		this.field = field;
-		this.clazz = clazz;
-	}
-	
-	public Node(Class<?> clazz){
-		this(clazz, null);
+		clazz = field.getType();
 	}
 	
 	public List<Node> getElements() {
 		return elements;
 	}
 	
-	public Field getClassField() {
+	public Field getField() {
 		return field;
 	}
 	

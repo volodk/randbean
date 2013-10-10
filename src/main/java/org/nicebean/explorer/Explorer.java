@@ -13,7 +13,7 @@ public class Explorer {
 		
 		if (depth <= max_depth) {
 			
-			Node node = new Node(clazz, classField);
+			Node node = new Node(classField);
 			
 			if ( isJdkClass(clazz) ) {
 				
