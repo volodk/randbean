@@ -2,9 +2,15 @@ package org.nicebean.types;
 
 import org.nicebean.annotations.Works;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
+
 @Works(with = String.class)
 public class RandomString extends AbstractValue {
-
+	
 	public RandomString(Class<?> clazz) {
 		super(clazz);
 	}
@@ -13,7 +19,7 @@ public class RandomString extends AbstractValue {
 	public Object generate( DetailLevel s ) {
 		
 		if( clazz != null && String.class.isAssignableFrom(clazz) ){
-			int length = rnd.nextInt( s.value() );
+			int length = rnd.nextInt( ARRAY_SIZE_LIMIT );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){
 				char ch = 0;

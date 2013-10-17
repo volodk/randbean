@@ -11,15 +11,30 @@ public class ValueFactory {
 	public interface RandomValue {
 		
 		enum DetailLevel {
-			SHALLOW(1), DEEP(10);
 			
-			int depth;
+			SHALLOW(1) {
+				@Override
+				public boolean followReferences() {
+					return false;
+				}
+			}, FULL(10) {
+				@Override
+				public boolean followReferences() {
+					return true;
+				}
+			};
+			
+			private int depth;
+			
 			private DetailLevel(int d){
 				depth = d;
 			}
+			
 			public int value(){
 				return depth;
 			}
+			
+			public abstract boolean followReferences();
 		}
 		
 		Object generate(DetailLevel d);
@@ -46,7 +61,8 @@ public class ValueFactory {
 		
 		if( clazz != null ){
 			
-			// if is interface
+			// TODO: if is interface
+			
 			if(clazz.isPrimitive()){
 				rv = new RandomPrimitive(clazz);
 				

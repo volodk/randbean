@@ -2,6 +2,12 @@ package org.nicebean.types;
 
 import org.nicebean.annotations.Works;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
+
 @Works(with = { boolean.class, byte.class, short.class, char.class, int.class,
 		long.class, float.class, double.class })
 public class RandomPrimitive extends AbstractValue {
@@ -19,7 +25,7 @@ public class RandomPrimitive extends AbstractValue {
 				case "short":
 					return (short) (rnd.nextInt(Short.MAX_VALUE) & 0xFFFF);
 				case "int":
-					return rnd.nextInt();
+					return rnd.nextInt(INTEGER_LIMIT);
 				case "long":
 					return rnd.nextLong();
 				case "float":

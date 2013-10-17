@@ -12,7 +12,15 @@ public class RandomPlainBean extends AbstractValue {
 
 	@Override
 	public Object generate(DetailLevel s) {
-		Node root = Explorer.buildReferenceGraph(clazz, s.value());
-		return Builder.newInstance(root);
+		
+		if( DetailLevel.SHALLOW == s ){
+			
+			return null;
+			
+		} else {
+			final int depth = s.value();
+			Node root = Explorer.buildReferenceGraph(clazz, depth);
+			return Builder.newInstance(root);
+		}
 	}
 }

@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
-import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -26,15 +25,15 @@ public class NiceBeanTest {
     // add here default or null-argument constructor + getters & setters
   }
 
-  @Nice(level = DetailLevel.DEEP)
-  Person $4test;
+  @Nice
+  Person bean;
 
   @Test
   public void test() {
     
-	  Assert.assertNotNull($4test);
+	  Assert.assertNotNull(bean);
 	  
-	  System.out.println($4test);
+	  System.out.println(bean);
 	  
   }
 

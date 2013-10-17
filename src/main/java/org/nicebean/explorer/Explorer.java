@@ -2,6 +2,11 @@ package org.nicebean.explorer;
 
 import java.lang.reflect.Field;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class Explorer {
 	
 	public static Node buildReferenceGraph(Class<?> rootClazz, int maxDepth) {
@@ -9,13 +14,13 @@ public class Explorer {
 		return buildReferenceGraph(rootClazz, null, 0, maxDepth);
 	}
 
-	private static Node buildReferenceGraph(Class<?> clazz, Field classField, int depth, int max_depth) {
+	private static Node buildReferenceGraph(Class<?> clazz, Field classField, int depth, final int limit) {
 		
-		if (depth <= max_depth) {
+		if ( depth <= limit ) {
 			
-			Node node = new Node(classField);
+			Node node = new Node(clazz, classField);
 			
-			if ( isJdkClass(clazz) ) {
+			if ( isJdkClass(clazz) ) {	// TODO: cache here
 				
 				node.markAsLeaf();
 				
@@ -23,7 +28,7 @@ public class Explorer {
 				
 				for (Field f : clazz.getDeclaredFields()) {
 					
-					Node child = buildReferenceGraph(f.getType(), f, depth + 1, max_depth);
+					Node child = buildReferenceGraph(f.getType(), f, depth + 1, limit);
 			
 					if (child != null)
 						node.addElement(child);

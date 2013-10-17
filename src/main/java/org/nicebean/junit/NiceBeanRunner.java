@@ -14,6 +14,11 @@ import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.utils.BeanUtils;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 
 	private final List<FrameworkField> fields;
@@ -40,9 +45,10 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 			Field fieldObject = ff.getField();
 			Class<?> fieldClass = fieldObject.getType();
 			
+			RandomValue rv = ValueFactory.resolve(fieldClass, fieldObject.getGenericType() );
+			
 			RandomValue.DetailLevel details = howDeepDoesTheRabbitHoleGo(ff.getAnnotations());
 			
-			RandomValue rv = ValueFactory.resolve(fieldClass, fieldObject.getGenericType() );
 			Object value = rv.generate( details );
 			
 			BeanUtils.setSilently(fieldObject, test, value);

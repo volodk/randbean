@@ -27,7 +27,7 @@ public class RandomArray extends AbstractValue {
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( s.value() );
+				dimensions[i] = 1 + rnd.nextInt( ARRAY_SIZE_LIMIT );
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);

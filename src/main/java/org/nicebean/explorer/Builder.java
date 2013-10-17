@@ -5,6 +5,11 @@ import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;
 import org.nicebean.utils.BeanUtils;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class Builder {
 	
 	public static Object newInstance(Node node) {

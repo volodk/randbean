@@ -4,6 +4,11 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class Node {
 
 	private boolean leaf;
@@ -11,9 +16,13 @@ public class Node {
 	private Class<?> clazz;
 	private List<Node> elements = new LinkedList<>();
 	
-	public Node(Field field){
+	public Node(Class<?> clazz, Field field){
 		this.field = field;
-		clazz = field.getType();
+		this.clazz = clazz;
+	}
+	
+	public Node(Class<?> clazz){
+		this(clazz, null);
 	}
 	
 	public List<Node> getElements() {

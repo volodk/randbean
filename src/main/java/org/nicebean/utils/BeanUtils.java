@@ -2,6 +2,11 @@ package org.nicebean.utils;
 
 import java.lang.reflect.Field;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class BeanUtils {
 	
 	public static void setSilently(Field field, Object instance, Object value){
@@ -16,7 +21,6 @@ public class BeanUtils {
 	}
 	
 	public static Object newInstance( Class<?> clazz ) throws InstantiationException, IllegalAccessException{
-		
 		return clazz.newInstance();
 	}
 	

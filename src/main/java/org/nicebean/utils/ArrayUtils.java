@@ -1,5 +1,10 @@
 package org.nicebean.utils;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 public class ArrayUtils {
 	
 	public static int countArrayDimensions( Class<?> arrayClazz ){
@@ -51,13 +56,6 @@ public class ArrayUtils {
 			return type;
 		}
 		return null;
-	}
-	
-	public static void deepArrayToString( Object array ){
-		if ( array != null && array.getClass().isArray() ){
-			
-			int[] dimensions = countArrayDimensions(array);
-		}
 	}
 	
 }

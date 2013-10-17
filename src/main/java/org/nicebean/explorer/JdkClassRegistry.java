@@ -10,6 +10,11 @@ import java.util.Set;
 
 import org.nicebean.utils.ArrayUtils;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
 

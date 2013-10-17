@@ -5,7 +5,12 @@ import java.lang.annotation.RetentionPolicy;
 
 import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;
 
+/**
+ * 
+ * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
+ *
+ */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Nice {
-	DetailLevel level() default DetailLevel.DEEP;
+	DetailLevel level() default DetailLevel.FULL;
 }
