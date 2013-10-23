@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
+import org.nicebean.types.DescribeStrategy;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -26,6 +27,7 @@ public class NiceBeanTest {
   }
 
   @Nice
+//  @Nice(description = DescribeStrategy.FULL)
   Person bean;
 
   @Test

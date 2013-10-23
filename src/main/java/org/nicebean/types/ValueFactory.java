@@ -10,34 +10,7 @@ public class ValueFactory {
 	
 	public interface RandomValue {
 		
-		enum DetailLevel {
-			
-			SHALLOW(1) {
-				@Override
-				public boolean followReferences() {
-					return false;
-				}
-			}, FULL(10) {
-				@Override
-				public boolean followReferences() {
-					return true;
-				}
-			};
-			
-			private int depth;
-			
-			private DetailLevel(int d){
-				depth = d;
-			}
-			
-			public int value(){
-				return depth;
-			}
-			
-			public abstract boolean followReferences();
-		}
-		
-		Object generate(DetailLevel d);
+		Object generate(DescribeStrategy d);
 	}
 	
 	private static final Map<Class<?>, RandomValue> factories = new HashMap<>();
@@ -50,10 +23,14 @@ public class ValueFactory {
 	
 	private static final RandomValue NULL_OBJECT_VALUE = new RandomValue(){
 		@Override
-		public Object generate(DetailLevel d) {
+		public Object generate(DescribeStrategy d) {
 			return null;
 		}
 	};
+	
+	public static RandomValue resolve(Class<?> clazz){
+		return resolve(clazz, null);
+	}
 	
 	public static RandomValue resolve(Class<?> clazz, Type genericType){
 		
@@ -63,7 +40,7 @@ public class ValueFactory {
 			
 			// TODO: if is interface
 			
-			if(clazz.isPrimitive()){
+			if( clazz.isPrimitive() ){
 				rv = new RandomPrimitive(clazz);
 				
 			} else if ( clazz.isArray() ){

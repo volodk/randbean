@@ -10,6 +10,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.nicebean.annotations.Nice;
+import org.nicebean.types.DescribeStrategy;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.utils.BeanUtils;
@@ -33,12 +34,12 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 	@Override
 	protected Statement methodInvoker(FrameworkMethod method, Object test) {
 		
-		populateNiceObjects(test);
+		populate(test);
 		
 		return super.methodInvoker(method, test);
 	}
 
-	protected void populateNiceObjects(Object test) {
+	protected void populate(final Object test) {
 		
 		for (FrameworkField ff : fields) {
 			
@@ -47,16 +48,16 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 			
 			RandomValue rv = ValueFactory.resolve(fieldClass, fieldObject.getGenericType() );
 			
-			RandomValue.DetailLevel details = howDeepDoesTheRabbitHoleGo(ff.getAnnotations());
+			DescribeStrategy descr = resolveStrategy(ff.getAnnotations());
 			
-			Object value = rv.generate( details );
+			Object value = rv.generate( descr );
 			
 			BeanUtils.setSilently(fieldObject, test, value);
 		}
 	}
 
-	private RandomValue.DetailLevel howDeepDoesTheRabbitHoleGo(Annotation[] annotations) {
-		return ( (Nice)annotations[0] ).level();
+	private DescribeStrategy resolveStrategy(Annotation[] annotations) {
+		return ( (Nice)annotations[0] ).description();
 	}
 
 }

@@ -17,7 +17,9 @@ public class RandomMap extends AbstractValue {
 	}
 
 	@Override
-	public Object generate(DetailLevel s) {
+	public Object generate(DescribeStrategy s) {
+		
+		Class<?> clazz = getTargetClass();
 		
 		if( clazz != null && Map.class.isAssignableFrom(clazz) ){
 			

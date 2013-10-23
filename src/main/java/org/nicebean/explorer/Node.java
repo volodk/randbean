@@ -1,6 +1,7 @@
 package org.nicebean.explorer;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +36,13 @@ public class Node {
 	
 	public Class<?> getClassType() {
 		return clazz;
+	}
+	
+	public Type getGenericType(){
+		if( field != null )
+			return field.getGenericType();
+		else
+			return null;
 	}
 	
 	public boolean isLeaf() {

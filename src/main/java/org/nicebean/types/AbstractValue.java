@@ -8,12 +8,14 @@ public abstract class AbstractValue implements RandomValue {
 	
 	protected final Random rnd = new Random( System.currentTimeMillis() );
 	
-	protected static final int ARRAY_SIZE_LIMIT = 10;
-	protected static final int INTEGER_LIMIT = 100;
-	
-	protected Class<?> clazz;
+	private Class<?> clazz;
 	
 	public AbstractValue(Class<?> clazz) {
 		this.clazz = clazz;
 	}
+	
+	protected final Class<?> getTargetClass(){
+		return clazz;
+	}
+	
 }

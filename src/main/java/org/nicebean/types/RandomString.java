@@ -16,10 +16,12 @@ public class RandomString extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( DetailLevel s ) {
+	public Object generate( DescribeStrategy s ) {
+		
+		Class<?> clazz = getTargetClass();
 		
 		if( clazz != null && String.class.isAssignableFrom(clazz) ){
-			int length = rnd.nextInt( ARRAY_SIZE_LIMIT );
+			int length = rnd.nextInt( s.getSizeLimit() );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){
 				char ch = 0;

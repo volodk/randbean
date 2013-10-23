@@ -51,13 +51,15 @@ public class Main {
 
 	static MyBean newObject(Class<MyBean> clazz) {
 		
-		int max_depth = 1;
+//		int max_depth = 1;
+//		
+//		Node root = Explorer.buildReferenceGraph(clazz, max_depth);
+//		
+//		Object reference = Builder.newInstance(root);
+//		
+//		return clazz.cast(reference);
 		
-		Node root = Explorer.buildReferenceGraph(clazz, max_depth);
-		
-		Object reference = Builder.newInstance(root);
-		
-		return clazz.cast(reference);
+		return null;
 	}
 	
 

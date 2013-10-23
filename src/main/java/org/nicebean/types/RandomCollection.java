@@ -18,7 +18,10 @@ public class RandomCollection extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( DetailLevel s ) {
+	public Object generate( DescribeStrategy s ) {
+		
+		Class<?> clazz = getTargetClass();
+		
 		if( clazz != null && Collection.class.isAssignableFrom(clazz) ){
 			
 			// get concrete collection

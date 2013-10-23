@@ -11,16 +11,12 @@ public class RandomPlainBean extends AbstractValue {
 	}
 
 	@Override
-	public Object generate(DetailLevel s) {
+	public Object generate(DescribeStrategy strategy) {
 		
-		if( DetailLevel.SHALLOW == s ){
-			
-			return null;
-			
-		} else {
-			final int depth = s.value();
-			Node root = Explorer.buildReferenceGraph(clazz, depth);
-			return Builder.newInstance(root);
-		}
+		Class<?> clazz = getTargetClass();
+
+		Node root = Explorer.buildReferenceGraph(clazz, strategy);
+		
+		return Builder.newInstance(root);
 	}
 }

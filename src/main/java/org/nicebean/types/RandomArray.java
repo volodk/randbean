@@ -19,7 +19,9 @@ public class RandomArray extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( DetailLevel s ) {
+	public Object generate( DescribeStrategy s ) {
+		
+		Class<?> clazz = getTargetClass();
 		
 		if( clazz != null && clazz.isArray() ){
 			
@@ -27,7 +29,7 @@ public class RandomArray extends AbstractValue {
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( ARRAY_SIZE_LIMIT );
+				dimensions[i] = 1 + rnd.nextInt( s.getSizeLimit() );
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);
@@ -58,7 +60,7 @@ public class RandomArray extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate( DetailLevel.SHALLOW );
+			return rv.generate( DescribeStrategy.SHALLOW );
 		}
 		
 	}

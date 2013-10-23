@@ -1,8 +1,10 @@
 package org.nicebean.explorer;
 
+import java.lang.reflect.Type;
+
+import org.nicebean.types.DescribeStrategy;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.types.ValueFactory.RandomValue;
-import org.nicebean.types.ValueFactory.RandomValue.DetailLevel;
 import org.nicebean.utils.BeanUtils;
 
 /**
@@ -20,9 +22,11 @@ public class Builder {
 			
 			if( node.isLeaf() ){
 				
-				RandomValue rv = ValueFactory.resolve( classType, node.getField().getGenericType() );
+				Type genericType = node.getGenericType();
 				
-				return rv.generate( DetailLevel.SHALLOW );
+				RandomValue rv = ValueFactory.resolve( classType, genericType );
+				
+				return rv.generate( DescribeStrategy.SHALLOW );
 				
 			} else {
 				

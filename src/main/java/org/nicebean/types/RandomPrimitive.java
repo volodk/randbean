@@ -17,7 +17,10 @@ public class RandomPrimitive extends AbstractValue {
 	}
 	
 	@Override
-	public Object generate(/*ignore*/ DetailLevel s) {
+	public Object generate( DescribeStrategy s) {
+		
+		Class<?> clazz = getTargetClass();
+		
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
 				case "byte":
@@ -25,7 +28,7 @@ public class RandomPrimitive extends AbstractValue {
 				case "short":
 					return (short) (rnd.nextInt(Short.MAX_VALUE) & 0xFFFF);
 				case "int":
-					return rnd.nextInt(INTEGER_LIMIT);
+					return rnd.nextInt( s.getIntegerLimit() );
 				case "long":
 					return rnd.nextLong();
 				case "float":
