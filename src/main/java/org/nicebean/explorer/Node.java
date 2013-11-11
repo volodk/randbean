@@ -49,8 +49,8 @@ public class Node {
 		return leaf;
 	}
 	
-	public void markAsLeaf(){
-		leaf = true;
+	public boolean markAsLeaf(){
+		return leaf = true;
 	}
 	
 	public void addElement(Node subElement){

@@ -1,8 +1,10 @@
 package org.nicebean.explorer;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Iterator;
 
-import org.nicebean.types.DescribeStrategy;
+import org.nicebean.types.GenerateStrategy;
 
 /**
  * 
@@ -11,37 +13,41 @@ import org.nicebean.types.DescribeStrategy;
  */
 public class Explorer {
 	
-	public static Node buildReferenceGraph(Class<?> rootClazz, DescribeStrategy level) {
+	public static Node buildReferenceGraph(Class<?> rootClazz, GenerateStrategy strategy) {
 		
-		final int limit = level.depth();
+		int maxDepth = strategy.followReferences() ? 10 : 1;
 		
-		return buildReferenceGraph(rootClazz, null, level, 0, limit );
+		return buildReferenceGraph(rootClazz, null, strategy, 0, maxDepth );
 	}
 
-	private static Node buildReferenceGraph(Class<?> clazz, Field classField, DescribeStrategy level, int depth, int limit) {
+	private static Node buildReferenceGraph(Class<?> clazz, Field classField, GenerateStrategy st, int currDepth, int maxDepth) {
 		
-		if ( depth <= limit ) {
+		if ( currDepth <= maxDepth ) {
 			
 			Node node = new Node(clazz, classField);
 			
-			if ( isJdkClass(clazz) ) {	// TODO: cache here
+			if ( isJdkClass(clazz) ) {	
 				
 				node.markAsLeaf();
 				
 			} else {
 				
-				if ( level.followReferences() ){
-					for (Field f : clazz.getDeclaredFields()) {
+				if ( st.followReferences() ){
+					Iterator<Field> it = Arrays.asList(clazz.getDeclaredFields()).iterator();
+					
+					boolean isLimitReached = false;
+					
+					while( it.hasNext() && !isLimitReached ){
+						Field f = it.next();
 						
-						Node child = buildReferenceGraph(f.getType(), f, level, depth + 1, limit);
+						Node child = buildReferenceGraph(f.getType(), f, st, currDepth + 1, maxDepth);
 				
 						if (child != null )
 							node.addElement(child);
 						else {
-							node.markAsLeaf();
-							break;
+							isLimitReached = node.markAsLeaf();
 						}
-					}
+					} 
 				}
 				
 			}

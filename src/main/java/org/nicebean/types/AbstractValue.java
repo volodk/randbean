@@ -1,21 +1,22 @@
 package org.nicebean.types;
 
+import java.lang.reflect.Type;
 import java.util.Random;
 
-import org.nicebean.types.ValueFactory.RandomValue;
-
-public abstract class AbstractValue implements RandomValue {
+public abstract class AbstractValue implements RandomValue, Generable {
 	
 	protected final Random rnd = new Random( System.currentTimeMillis() );
 	
-	private Class<?> clazz;
+	protected Class<?> clazz;
+	protected Type genericType;
 	
 	public AbstractValue(Class<?> clazz) {
-		this.clazz = clazz;
+		this(clazz, null);
 	}
 	
-	protected final Class<?> getTargetClass(){
-		return clazz;
+	public AbstractValue(Class<?> clazz, Type genericType) {
+		this.clazz = clazz;
+		this.genericType = genericType;
 	}
 	
 }

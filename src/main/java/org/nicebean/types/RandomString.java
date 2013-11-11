@@ -1,6 +1,5 @@
 package org.nicebean.types;
 
-import org.nicebean.annotations.Works;
 
 /**
  * 
@@ -8,20 +7,22 @@ import org.nicebean.annotations.Works;
  *
  */
 
-@Works(with = String.class)
-public class RandomString extends AbstractValue {
+public class RandomString extends AbstractValue implements Generable {
 	
 	public RandomString(Class<?> clazz) {
 		super(clazz);
 	}
+	
+	@Override
+	public boolean canHandle(Class<?> clazz) {
+		return String.class.isAssignableFrom(clazz);
+	}
 
 	@Override
-	public Object generate( DescribeStrategy s ) {
-		
-		Class<?> clazz = getTargetClass();
+	public Object generate( GenerateStrategy s ) {
 		
 		if( clazz != null && String.class.isAssignableFrom(clazz) ){
-			int length = rnd.nextInt( s.getSizeLimit() );
+			int length = rnd.nextInt( s.getContainerSizeLimit() );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){
 				char ch = 0;

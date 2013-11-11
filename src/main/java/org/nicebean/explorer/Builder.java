@@ -2,9 +2,9 @@ package org.nicebean.explorer;
 
 import java.lang.reflect.Type;
 
-import org.nicebean.types.DescribeStrategy;
+import org.nicebean.types.GenerateStrategy;
+import org.nicebean.types.RandomValue;
 import org.nicebean.types.ValueFactory;
-import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.utils.BeanUtils;
 
 /**
@@ -26,7 +26,7 @@ public class Builder {
 				
 				RandomValue rv = ValueFactory.resolve( classType, genericType );
 				
-				return rv.generate( DescribeStrategy.SHALLOW );
+				return rv.generate( GenerateStrategy.SHALLOW );
 				
 			} else {
 				

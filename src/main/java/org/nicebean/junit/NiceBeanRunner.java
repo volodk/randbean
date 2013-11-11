@@ -10,9 +10,9 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.nicebean.annotations.Nice;
-import org.nicebean.types.DescribeStrategy;
+import org.nicebean.types.GenerateStrategy;
+import org.nicebean.types.RandomValue;
 import org.nicebean.types.ValueFactory;
-import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.utils.BeanUtils;
 
 /**
@@ -43,21 +43,20 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 		
 		for (FrameworkField ff : fields) {
 			
-			Field fieldObject = ff.getField();
-			Class<?> fieldClass = fieldObject.getType();
+			Field field = ff.getField();
 			
-			RandomValue rv = ValueFactory.resolve(fieldClass, fieldObject.getGenericType() );
+			RandomValue rv = ValueFactory.resolve( field.getType(), field.getGenericType() );
 			
-			DescribeStrategy descr = resolveStrategy(ff.getAnnotations());
+			GenerateStrategy gs = resolveStrategy( ff.getAnnotations() );
 			
-			Object value = rv.generate( descr );
+			Object value = rv.generate( gs );
 			
-			BeanUtils.setSilently(fieldObject, test, value);
+			BeanUtils.setSilently(field, test, value);
 		}
 	}
 
-	private DescribeStrategy resolveStrategy(Annotation[] annotations) {
-		return ( (Nice)annotations[0] ).description();
+	private GenerateStrategy resolveStrategy(Annotation[] annotations) {
+		return ( (Nice)annotations[0] ).value();
 	}
 
 }

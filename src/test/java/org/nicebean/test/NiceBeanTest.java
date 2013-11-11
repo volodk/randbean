@@ -1,12 +1,13 @@
 package org.nicebean.test;
 
+import java.util.Set;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
-import org.nicebean.types.DescribeStrategy;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -15,27 +16,23 @@ public class NiceBeanTest {
     private String name;
     private int age;
     private Person friend;
-//    private Set<Person> children;
+    private Set<Person> children;
     
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", age=" + age + ", friend=" + friend
-				+ "]";
+				+ ", children=" + children + "]";
 	}
-
-    // add here default or null-argument constructor + getters & setters
   }
 
-  @Nice
-//  @Nice(description = DescribeStrategy.FULL)
-  Person bean;
+  @Nice Person person;
 
   @Test
   public void test() {
     
-	  Assert.assertNotNull(bean);
+	  Assert.assertNotNull(person);
 	  
-	  System.out.println(bean);
+	  System.out.println(person);
 	  
   }
 

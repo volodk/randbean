@@ -2,25 +2,25 @@ package org.nicebean.types;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
-import org.nicebean.annotations.Works;
-
-@Works(with = {Collection.class, List.class, Set.class})
 public class RandomCollection extends AbstractValue {
 	
-	private Type genericType;
+	public RandomCollection(Class<?> clazz) {
+		super(clazz);
+	}
 
 	public RandomCollection(Class<?> clazz, Type genericType) {
-		super(clazz);
-		this.genericType = genericType;
+		super(clazz, genericType);
+	}
+	
+	@Override
+	public boolean canHandle(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public Object generate( DescribeStrategy s ) {
-		
-		Class<?> clazz = getTargetClass();
+	public Object generate( GenerateStrategy s ) {
 		
 		if( clazz != null && Collection.class.isAssignableFrom(clazz) ){
 			

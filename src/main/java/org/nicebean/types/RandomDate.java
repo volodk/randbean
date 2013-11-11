@@ -2,19 +2,20 @@ package org.nicebean.types;
 
 import java.util.Date;
 
-import org.nicebean.annotations.Works;
-
-@Works( with = { Date.class, java.sql.Date.class })
 public class RandomDate extends AbstractValue {
 
 	public RandomDate(Class<?> clazz) {
 		super(clazz);
 	}
+	
+	@Override
+	public boolean canHandle(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public Object generate( /*ignore*/ DescribeStrategy s ) {
-		
-		Class<?> clazz = getTargetClass();
+	public Object generate( /*ignore*/ GenerateStrategy gs ) {
 		
 		if( clazz != null && Date.class.isAssignableFrom(clazz) ){
 			try {

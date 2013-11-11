@@ -1,15 +1,11 @@
 package org.nicebean.types;
 
-import org.nicebean.annotations.Works;
-
 /**
  * 
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
 
-@Works(with = { boolean.class, byte.class, short.class, char.class, int.class,
-		long.class, float.class, double.class })
 public class RandomPrimitive extends AbstractValue {
 
 	public RandomPrimitive(Class<?> clazz) {
@@ -17,9 +13,13 @@ public class RandomPrimitive extends AbstractValue {
 	}
 	
 	@Override
-	public Object generate( DescribeStrategy s) {
-		
-		Class<?> clazz = getTargetClass();
+	public boolean canHandle(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public Object generate( GenerateStrategy s) {
 		
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
@@ -28,7 +28,7 @@ public class RandomPrimitive extends AbstractValue {
 				case "short":
 					return (short) (rnd.nextInt(Short.MAX_VALUE) & 0xFFFF);
 				case "int":
-					return rnd.nextInt( s.getIntegerLimit() );
+					return rnd.nextInt( s.getIntegerRangeLimit() );
 				case "long":
 					return rnd.nextLong();
 				case "float":

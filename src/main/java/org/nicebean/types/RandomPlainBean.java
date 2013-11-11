@@ -9,13 +9,17 @@ public class RandomPlainBean extends AbstractValue {
 	public RandomPlainBean(Class<?> clazz) {
 		super(clazz);
 	}
+	
+	@Override
+	public boolean canHandle(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public Object generate(DescribeStrategy strategy) {
+	public Object generate(GenerateStrategy gs) {
 		
-		Class<?> clazz = getTargetClass();
-
-		Node root = Explorer.buildReferenceGraph(clazz, strategy);
+		Node root = Explorer.buildReferenceGraph(clazz, gs);
 		
 		return Builder.newInstance(root);
 	}

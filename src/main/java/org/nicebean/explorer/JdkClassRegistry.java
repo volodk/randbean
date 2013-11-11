@@ -15,7 +15,7 @@ import org.nicebean.utils.ArrayUtils;
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
-class JdkClassRegistry {
+final class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
 
 	static {
@@ -56,17 +56,28 @@ class JdkClassRegistry {
 	}
 
 	static {
+		registry.add(boolean.class);
 		registry.add(byte.class);
 		registry.add(short.class);
-		registry.add(int.class);
-		registry.add(long.class);
-		registry.add(float.class);
-		registry.add(double.class);
 		registry.add(char.class);
-		registry.add(boolean.class);
+		registry.add(int.class);
+		registry.add(float.class);
+		registry.add(long.class);
+		registry.add(double.class);
 	}
 
 	public static boolean isJdkClass(Class<?> clazz) {
-		return registry.contains(clazz) || registry.contains( ArrayUtils.getComponentType(clazz) );
+		if(clazz != null) {
+			boolean isJdkClass = false;
+			if(clazz.isArray()){
+				isJdkClass = registry.contains( ArrayUtils.getComponentType(clazz) );
+			} else {
+				isJdkClass = registry.contains(clazz);
+			}
+			return isJdkClass;
+		} else {
+			System.err.println("Argument class parameter is NULL");
+			return false;
+		}
 	}
 }

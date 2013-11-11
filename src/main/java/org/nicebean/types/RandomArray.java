@@ -4,24 +4,26 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-import org.nicebean.annotations.Works;
-import org.nicebean.types.ValueFactory.RandomValue;
 import org.nicebean.utils.ArrayUtils;
 
-@Works(with = {Object[].class})
 public class RandomArray extends AbstractValue {
 	
 	private Type genericType;
 	
 	public RandomArray(Class<?> clazz, Type genericType) {
-		super(clazz );
-		this.genericType = genericType;
+		super(clazz, genericType );
+	}
+	
+	@Override
+	public boolean canHandle(Class<?> clazz) {
+		if( clazz != null ){
+			return clazz.isArray();
+		}
+		return false;
 	}
 
 	@Override
-	public Object generate( DescribeStrategy s ) {
-		
-		Class<?> clazz = getTargetClass();
+	public Object generate( GenerateStrategy s ) {
 		
 		if( clazz != null && clazz.isArray() ){
 			
@@ -29,7 +31,7 @@ public class RandomArray extends AbstractValue {
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( s.getSizeLimit() );
+				dimensions[i] = 1 + rnd.nextInt( s.getContainerSizeLimit() );
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);
@@ -60,7 +62,7 @@ public class RandomArray extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate( DescribeStrategy.SHALLOW );
+			return rv.generate( GenerateStrategy.SHALLOW );
 		}
 		
 	}
