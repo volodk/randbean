@@ -3,7 +3,7 @@ package org.nicebean.types;
 import java.lang.reflect.Type;
 import java.util.Random;
 
-public abstract class AbstractValue implements RandomValue, Generable {
+public abstract class AbstractValue implements RandomValue {
 	
 	protected final Random rnd = new Random( System.currentTimeMillis() );
 	

@@ -1,25 +1,30 @@
-package org.nicebean.types;
+package org.nicebean.types.random;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
+import org.nicebean.types.AbstractValue;
+import org.nicebean.types.GenerateStrategy;
+import org.nicebean.types.RandomValue;
+import org.nicebean.types.GeneratorFactory;
+import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.ArrayUtils;
 
-public class RandomArray extends AbstractValue {
+public class Array extends AbstractValue {
 	
-	private Type genericType;
-	
-	public RandomArray(Class<?> clazz, Type genericType) {
-		super(clazz, genericType );
+	public static class G implements GeneratorFactory
+	{
+		public boolean checkSupport(Class<?> clazz) {
+			return clazz != null && clazz.isArray();
+		}
+		
+		public RandomValue newValueGenerator(Class<?> clazz, Type genericType){
+			return new Array(clazz, genericType);
+		}
 	}
 	
-	@Override
-	public boolean canHandle(Class<?> clazz) {
-		if( clazz != null ){
-			return clazz.isArray();
-		}
-		return false;
+	public Array(Class<?> clazz, Type genericType) {
+		super(clazz, genericType );
 	}
 
 	@Override
@@ -51,11 +56,11 @@ public class RandomArray extends AbstractValue {
 		
 		if( from < to ){
 			
-			Object array = Array.newInstance(klass, Arrays.copyOfRange(dimensions, from, to) );
+			Object array = java.lang.reflect.Array.newInstance(klass, Arrays.copyOfRange(dimensions, from, to) );
 			
 			for(int i = 0; i < dimensions[from]; i++){
 				Object value = fill(klass, rv, dimensions, from + 1, to );
-				Array.set(array, i, value);
+				java.lang.reflect.Array.set(array, i, value);
 			}
 			
 			return array;

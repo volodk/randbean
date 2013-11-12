@@ -13,18 +13,18 @@ import org.nicebean.types.GenerateStrategy;
  */
 public class Explorer {
 	
-	public static Node buildReferenceGraph(Class<?> rootClazz, GenerateStrategy strategy) {
+	public static Node buildReferenceGraph(Class<?> rootClazz, GenerateStrategy gs) {
 		
-		int maxDepth = strategy.followReferences() ? 10 : 1;
+		int maxDepth = gs.followReferences() ? 10 : 1;
 		
-		return buildReferenceGraph(rootClazz, null, strategy, 0, maxDepth );
+		return buildReferenceGraph(rootClazz, null, gs, 0, maxDepth );
 	}
 
-	private static Node buildReferenceGraph(Class<?> clazz, Field classField, GenerateStrategy st, int currDepth, int maxDepth) {
+	private static Node buildReferenceGraph(Class<?> clazz, Field root, GenerateStrategy gs, int currDepth, int maxDepth) {
 		
 		if ( currDepth <= maxDepth ) {
 			
-			Node node = new Node(clazz, classField);
+			Node node = new Node(clazz, root);
 			
 			if ( isJdkClass(clazz) ) {	
 				
@@ -32,7 +32,8 @@ public class Explorer {
 				
 			} else {
 				
-				if ( st.followReferences() ){
+				if ( followReferences(gs, root) ){
+					
 					Iterator<Field> it = Arrays.asList(clazz.getDeclaredFields()).iterator();
 					
 					boolean isLimitReached = false;
@@ -40,7 +41,7 @@ public class Explorer {
 					while( it.hasNext() && !isLimitReached ){
 						Field f = it.next();
 						
-						Node child = buildReferenceGraph(f.getType(), f, st, currDepth + 1, maxDepth);
+						Node child = buildReferenceGraph(f.getType(), f, gs, currDepth + 1, maxDepth);
 				
 						if (child != null )
 							node.addElement(child);
@@ -55,6 +56,13 @@ public class Explorer {
 			
 		}
 		return null;
+	}
+
+	private static boolean followReferences(GenerateStrategy gs, Field root) {
+		if( root == null && gs.followReferences() == false ){	// shallow mode from JUnit. No internal exploration
+			return true;
+		}
+		return gs.followReferences();
 	}
 
 	private static boolean isJdkClass(Class<?> clazz) {

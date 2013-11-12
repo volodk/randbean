@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.annotations.Nice;
 import org.nicebean.junit.NiceBeanRunner;
+import org.nicebean.types.GenerateStrategy;
 
 @RunWith(NiceBeanRunner.class)
 public class NiceBeanTest {
@@ -15,17 +16,17 @@ public class NiceBeanTest {
   public static class Person {
     private String name;
     private int age;
-    private Person friend;
-    private Set<Person> children;
+    private Person bestFriend;
+    private Set<Person> peopleAround;
     
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + ", friend=" + friend
-				+ ", children=" + children + "]";
+		return "Person [name=" + name + ", age=" + age + ", best friend=" + bestFriend
+				+ ", people around = " + peopleAround + "]";
 	}
   }
 
-  @Nice Person person;
+  @Nice(GenerateStrategy.SHALLOW) Person person;
 
   @Test
   public void test() {

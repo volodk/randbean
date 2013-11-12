@@ -15,7 +15,7 @@ import org.nicebean.utils.ArrayUtils;
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
-final class JdkClassRegistry {
+public final class JdkClassRegistry {
 	private static final Set<Class<?>> registry = new HashSet<>();
 
 	static {

@@ -33,10 +33,11 @@ public class Test {
 		System.out.println(a instanceof Object[] );
 		
 		
-		Field f = Test.class.getDeclaredField("f");
+		Field f = Test.class.getDeclaredField("mymap");
 		System.out.println(f.getType());
 		Type type = f.getGenericType();
 		System.out.println(type);
+		
 		if(type instanceof ParameterizedType){
 			ParameterizedType pType = (ParameterizedType)type;
 			

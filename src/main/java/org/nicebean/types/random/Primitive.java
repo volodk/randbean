@@ -1,4 +1,11 @@
-package org.nicebean.types;
+package org.nicebean.types.random;
+
+import java.lang.reflect.Type;
+
+import org.nicebean.types.AbstractValue;
+import org.nicebean.types.GenerateStrategy;
+import org.nicebean.types.RandomValue;
+import org.nicebean.types.GeneratorFactory;
 
 /**
  * 
@@ -6,16 +13,21 @@ package org.nicebean.types;
  *
  */
 
-public class RandomPrimitive extends AbstractValue {
-
-	public RandomPrimitive(Class<?> clazz) {
-		super(clazz);
-	}
+public class Primitive extends AbstractValue {
 	
-	@Override
-	public boolean canHandle(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+	public static class G implements GeneratorFactory
+	{
+		public boolean checkSupport(Class<?> clazz) {
+			return clazz != null && clazz.isPrimitive();
+		}
+		
+		public RandomValue newValueGenerator(Class<?> clazz, Type genericType){
+			return new Primitive(clazz);
+		}
+	}
+
+	Primitive(Class<?> clazz) {
+		super(clazz);
 	}
 	
 	@Override
