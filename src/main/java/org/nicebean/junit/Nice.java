@@ -1,9 +1,7 @@
-package org.nicebean.annotations;
+package org.nicebean.junit;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import org.nicebean.types.GenerateStrategy;
 
 /**
  * 
@@ -12,5 +10,4 @@ import org.nicebean.types.GenerateStrategy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Nice {
-	GenerateStrategy value() default GenerateStrategy.DEEP;
 }

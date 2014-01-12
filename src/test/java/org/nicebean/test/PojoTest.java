@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nicebean.annotations.Nice;
+import org.nicebean.junit.Nice;
 import org.nicebean.junit.NiceBeanRunner;
 
 @RunWith(NiceBeanRunner.class)
@@ -32,8 +32,7 @@ public class PojoTest {
     
   }
 
-  @Nice
-  Primitives bean;
+  @Nice Primitives bean;
 
   @Test
   public void test() {

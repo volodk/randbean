@@ -5,7 +5,7 @@ import java.util.Random;
 
 public abstract class AbstractValue implements RandomValue {
 	
-	protected final Random rnd = new Random( System.currentTimeMillis() );
+	protected final Random rnd = new Random();
 	
 	protected Class<?> clazz;
 	protected Type genericType;

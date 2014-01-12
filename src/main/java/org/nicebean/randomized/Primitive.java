@@ -1,11 +1,6 @@
-package org.nicebean.types.random;
-
-import java.lang.reflect.Type;
+package org.nicebean.randomized;
 
 import org.nicebean.types.AbstractValue;
-import org.nicebean.types.GenerateStrategy;
-import org.nicebean.types.RandomValue;
-import org.nicebean.types.GeneratorFactory;
 
 /**
  * 
@@ -14,24 +9,15 @@ import org.nicebean.types.GeneratorFactory;
  */
 
 public class Primitive extends AbstractValue {
-	
-	public static class G implements GeneratorFactory
-	{
-		public boolean checkSupport(Class<?> clazz) {
-			return clazz != null && clazz.isPrimitive();
-		}
-		
-		public RandomValue newValueGenerator(Class<?> clazz, Type genericType){
-			return new Primitive(clazz);
-		}
-	}
 
-	Primitive(Class<?> clazz) {
+	private static final int MAX_INT = 100;
+
+    public Primitive(Class<?> clazz) {
 		super(clazz);
 	}
 	
 	@Override
-	public Object generate( GenerateStrategy s) {
+	public Object generate() {
 		
 		if( clazz!= null && clazz.isPrimitive() ){
 			switch( clazz.toString() ){
@@ -40,7 +26,7 @@ public class Primitive extends AbstractValue {
 				case "short":
 					return (short) (rnd.nextInt(Short.MAX_VALUE) & 0xFFFF);
 				case "int":
-					return rnd.nextInt( s.getIntegerRangeLimit() );
+					return rnd.nextInt( MAX_INT );
 				case "long":
 					return rnd.nextLong();
 				case "float":

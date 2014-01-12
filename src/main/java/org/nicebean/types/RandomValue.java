@@ -4,5 +4,5 @@ package org.nicebean.types;
 
 public interface RandomValue {
 	
-	Object generate(GenerateStrategy gs);
+	Object generate();
 }

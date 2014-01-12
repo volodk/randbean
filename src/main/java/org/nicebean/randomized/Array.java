@@ -1,34 +1,23 @@
-package org.nicebean.types.random;
+package org.nicebean.randomized;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
 import org.nicebean.types.AbstractValue;
-import org.nicebean.types.GenerateStrategy;
 import org.nicebean.types.RandomValue;
-import org.nicebean.types.GeneratorFactory;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.ArrayUtils;
 
 public class Array extends AbstractValue {
 	
-	public static class G implements GeneratorFactory
-	{
-		public boolean checkSupport(Class<?> clazz) {
-			return clazz != null && clazz.isArray();
-		}
-		
-		public RandomValue newValueGenerator(Class<?> clazz, Type genericType){
-			return new Array(clazz, genericType);
-		}
-	}
-	
-	public Array(Class<?> clazz, Type genericType) {
+	private static final int MAX_DIMENTION_SIZE = 5;
+
+    public Array(Class<?> clazz, Type genericType) {
 		super(clazz, genericType );
 	}
 
 	@Override
-	public Object generate( GenerateStrategy s ) {
+	public Object generate() {
 		
 		if( clazz != null && clazz.isArray() ){
 			
@@ -36,7 +25,7 @@ public class Array extends AbstractValue {
 			int[] dimensions = new int[d];
 			int i = d;
 			while( --i >= 0 ){
-				dimensions[i] = 1 + rnd.nextInt( s.getContainerSizeLimit() );
+				dimensions[i] = 1 + rnd.nextInt(MAX_DIMENTION_SIZE);
 			}
 			
 			Class<?> componentType = ArrayUtils.getComponentType(clazz);
@@ -67,7 +56,7 @@ public class Array extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate( GenerateStrategy.SHALLOW );
+			return rv.generate();
 		}
 		
 	}

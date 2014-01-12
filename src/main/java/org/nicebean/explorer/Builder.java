@@ -2,7 +2,6 @@ package org.nicebean.explorer;
 
 import java.lang.reflect.Type;
 
-import org.nicebean.types.GenerateStrategy;
 import org.nicebean.types.RandomValue;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.BeanUtils;
@@ -26,7 +25,7 @@ public class Builder {
 				
 				RandomValue rv = ValueFactory.resolve( classType, genericType );
 				
-				return rv.generate( GenerateStrategy.SHALLOW );
+				return rv.generate();
 				
 			} else {
 				
