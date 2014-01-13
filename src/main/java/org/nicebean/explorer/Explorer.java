@@ -24,7 +24,7 @@ public class Explorer {
 
             Node node = new Node(clazz, root);
 
-            if (isJdkClass(clazz)) {
+            if (isJdkClass(clazz) || clazz.isArray()) {
 
                 node.markAsLeaf();
 

@@ -10,7 +10,7 @@ import org.nicebean.utils.ArrayUtils;
 
 public class Array extends AbstractValue {
 	
-	private static final int MAX_DIMENTION_SIZE = 5;
+	private static final int MAX_DIMENTION_SIZE = 5;   // TODO: make it customizable via annotation parameter
 
     public Array(Class<?> clazz, Type genericType) {
 		super(clazz, genericType );
