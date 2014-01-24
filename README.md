@@ -5,13 +5,13 @@ nicebean
 
 <h3>Use case</h3> If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
 ```
-obj.setPropertyA(...);
-obj.setPropertyB(...);
-obj.setPropertyC(...);
-obj.setPropertyD(...);
-obj.setPropertyE(...);
+bean.setPropertyA(...);
+bean.setPropertyB(...);
+bean.setPropertyC(...);
+bean.setPropertyD(...);
+bean.setPropertyE(...);
 ...
-obj.setPropertyZ(...);
+bean.setPropertyZ(...);
 ```
 <h3>What to do</h3> Mark an instance field(s) of your test with <b>@Nice</b> annotation and that's it. Basic idea is the following:
 
