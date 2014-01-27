@@ -2,9 +2,7 @@ package org.nicebean.types;
 
 import java.lang.reflect.Type;
 
-import org.nicebean.randomized.Array;
 import org.nicebean.randomized.NullValue;
-import org.nicebean.randomized.Primitive;
 
 public class ValueFactory {
 	
@@ -13,13 +11,17 @@ public class ValueFactory {
 	    if(clazz != null){ // TODO: replace with another pattern matcher
 	        
 	        if(clazz.isPrimitive())
-	            return new Primitive(clazz);
+	            return new org.nicebean.randomized.Primitive(clazz);
 	        
 	        if(clazz.isArray())
-                return new Array(clazz, genericType);
+                return new org.nicebean.randomized.Array(clazz, genericType);
 	        
 	        if(String.class.equals(clazz))
                 return new org.nicebean.randomized.String(clazz);
+	        
+	        if( clazz.isEnum() ){
+	            return new org.nicebean.randomized.Enum(clazz);
+	        }
 	        
 	        // TODO: add container support
 //	        if(!JdkClassRegistry.isJdkClass(clazz))

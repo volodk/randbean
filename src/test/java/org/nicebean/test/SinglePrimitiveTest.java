@@ -1,25 +1,24 @@
 package org.nicebean.test;
 
-import static org.junit.Assert.assertNotNull;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nicebean.junit.Nice;
 import org.nicebean.junit.NiceBeanRunner;
 
 @RunWith(NiceBeanRunner.class)
-public class StringTest {
+public class SinglePrimitiveTest {
 
 	@Nice
-	String str;
-
+	byte value;
+	
 	@Test
 	public void test() {
-
-		assertNotNull(str);
-
-		System.out.println(str);
-
+		System.out.println(value);
+		
+		byte DEFAULT_VALUE = 0;
+		
+		Assert.assertTrue(value != DEFAULT_VALUE);	// might fail with probability P(A) = 1/256
 	}
 
 }

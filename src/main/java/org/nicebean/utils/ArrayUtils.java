@@ -1,11 +1,23 @@
 package org.nicebean.utils;
 
+import java.util.Random;
+
 /**
  * 
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
 public class ArrayUtils {
+    
+    private static final Random rnd = new Random();
+    
+    public static <E> E randomElement(E[] array){
+        if( array != null && array.length > 1){
+            int L = array.length;
+            return array[ rnd.nextInt(L)]; 
+        }
+        return null;
+    }
 	
 	public static int countArrayDimensions( Class<?> arrayClazz ){
 		if( arrayClazz.isArray() ){

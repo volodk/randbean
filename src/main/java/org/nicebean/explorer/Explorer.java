@@ -24,7 +24,7 @@ public class Explorer {
 
             Node node = new Node(clazz, root);
 
-            if (isJdkClass(clazz) || clazz.isArray()) {
+            if ( isJdkClass(clazz) || clazz.isArray() || clazz.isEnum() || clazz.isInterface() ) {
 
                 node.markAsLeaf();
 
