@@ -1,19 +1,44 @@
 nicebean
 ========
 
-<b>Summary:</b> Populates java beans with random dummy data and makes your jUnit tests more lean ...
+<h3>Summary</h3> Populates java beans with random dummy data and makes your jUnit tests more lean
 
-<b>When:</b> If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
+<h3>Use case</h3> If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
 ```
-obj.setPropertyA(...);
-obj.setPropertyB(...);
-obj.setPropertyC(...);
-obj.setPropertyD(...);
-obj.setPropertyE(...);
+bean.setPropertyA(...);
+bean.setPropertyB(...);
+bean.setPropertyC(...);
+bean.setPropertyD(...);
+bean.setPropertyE(...);
 ...
-obj.setPropertyZ(...);
+bean.setPropertyZ(...);
 ```
-<b>What to do:</b> Just mark an instance field(s) of your test with <b>@Nice</b> annotation and you're done.
+<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Nice</b> annotation and that's it. Basic idea is the following:
 
-Thanks,  
+```
+@Nice private Pojo bean;
+
+@Test public void thisIsAtest(){
+  bean.getPropertyA() // null-safe access to generated data
+}
+```
+
+<h2>License</h2>
+```
+This software is licensed under the Apache 2 license, quoted below.
+
+Copyright 2013-2014 Volodymyr Krasnikov
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+```
 
