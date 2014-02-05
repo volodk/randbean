@@ -16,9 +16,9 @@ public class String extends AbstractValue {
 	}
 
 	@Override
-	public Object generate( ) {
+	protected Object doGenerate() {
 		
-		if( clazz != null && java.lang.String.class.isAssignableFrom(clazz) ){
+		if( java.lang.String.class.isAssignableFrom(clazz) ){
 			int length = 1 + rnd.nextInt( MAX_LENGTH );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){

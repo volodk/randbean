@@ -12,7 +12,7 @@ public class PlainBean extends AbstractValue {
 	}
 
 	@Override
-	public Object generate() {
+	protected Object doGenerate() {
 		
 		Node root = Explorer.buildReferenceGraph(clazz);
 		

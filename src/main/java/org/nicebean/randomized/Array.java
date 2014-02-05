@@ -17,9 +17,9 @@ public class Array extends AbstractValue {
 	}
 
 	@Override
-	public Object generate() {
+	protected Object doGenerate() {
 		
-		if( clazz != null && clazz.isArray() ){
+		if( clazz.isArray() ){
 			
 			int d = ArrayUtils.countArrayDimensions(clazz);
 			int[] dimensions = new int[d];

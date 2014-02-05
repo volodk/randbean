@@ -9,7 +9,7 @@ import org.nicebean.utils.BeanUtils;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 1:17:32 PM 
 
-public class NiceBean {
+public final class NiceBean {
     
     private NiceBean() {
     }

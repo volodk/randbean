@@ -1,8 +1,5 @@
 package org.nicebean.randomized;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import org.nicebean.types.AbstractValue;
 import org.nicebean.utils.ArrayUtils;
 
@@ -15,20 +12,10 @@ public class Enum extends AbstractValue {
     }
 
     @Override
-    public Object generate() {
-//        if (clazz.isEnum()) {
-//
-//            Field f;
-//            do{
-//                f = ArrayUtils.randomElement(clazz.getDeclaredFields());
-//            } while( f.getModifiers() != (Modifier.PUBLIC & Modifier.STATIC & Modifier.FINAL) );
-//
-//            @SuppressWarnings({ "unchecked", "rawtypes" })
-//            Object o = java.lang.Enum.valueOf((Class<java.lang.Enum>) clazz, f.getName());
-//
-//            return o;
-//
-//        }
+    protected Object doGenerate() {
+        if (clazz.isEnum()) {
+            return ArrayUtils.randomElement(clazz.getEnumConstants());
+        }
         return null;
     }
 }

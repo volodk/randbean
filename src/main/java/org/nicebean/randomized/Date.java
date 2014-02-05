@@ -9,9 +9,9 @@ public class Date extends AbstractValue {
 	}
 	
 	@Override
-	public Object generate() {
+	protected Object doGenerate() {
 		
-		if( clazz != null && java.util.Date.class.isAssignableFrom(clazz) ){
+		if( java.util.Date.class.isAssignableFrom(clazz) ){
 			try {
 				return clazz.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {

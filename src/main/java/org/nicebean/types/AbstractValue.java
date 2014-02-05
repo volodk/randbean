@@ -3,6 +3,8 @@ package org.nicebean.types;
 import java.lang.reflect.Type;
 import java.util.Random;
 
+import org.nicebean.utils.Assert;
+
 public abstract class AbstractValue implements RandomValue {
 	
 	protected final Random rnd = new Random();
@@ -15,8 +17,16 @@ public abstract class AbstractValue implements RandomValue {
 	}
 	
 	public AbstractValue(Class<?> clazz, Type genericType) {
+	    Assert.notNull(clazz);
 		this.clazz = clazz;
 		this.genericType = genericType;
 	}
+	
+	@Override
+	public Object generate() {
+	    return doGenerate();
+	}
+	
+	protected abstract Object doGenerate();
 	
 }

@@ -11,8 +11,6 @@ import org.junit.runners.model.Statement;
 import org.nicebean.explorer.Builder;
 import org.nicebean.explorer.Explorer;
 import org.nicebean.explorer.Node;
-import org.nicebean.types.RandomValue;
-import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.BeanUtils;
 
 /**

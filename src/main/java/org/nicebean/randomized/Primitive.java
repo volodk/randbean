@@ -17,9 +17,9 @@ public class Primitive extends AbstractValue {
 	}
 	
 	@Override
-	public Object generate() {
+	protected Object doGenerate() {
 		
-		if( clazz!= null && clazz.isPrimitive() ){
+		if( clazz.isPrimitive() ){
 			switch( clazz.toString() ){
 				case "byte":
 					return (byte) (rnd.nextInt(Byte.MAX_VALUE) & 0xFF);
