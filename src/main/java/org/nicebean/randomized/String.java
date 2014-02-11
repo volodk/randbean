@@ -14,6 +14,10 @@ public class String extends AbstractValue {
     public String(Class<?> clazz) {
 		super(clazz);
 	}
+    
+    public String() {
+        this(java.lang.String.class );
+    }
 
 	@Override
 	protected Object doGenerate() {

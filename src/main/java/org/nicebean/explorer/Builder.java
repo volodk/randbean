@@ -2,7 +2,8 @@ package org.nicebean.explorer;
 
 import java.lang.reflect.Type;
 
-import org.nicebean.types.RandomValue;
+import org.nicebean.types.AbstractValue;
+import org.nicebean.types.ShallowRandomValue;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.BeanUtils;
 
@@ -23,9 +24,9 @@ public class Builder {
 				
 				Type genericType = node.getGenericType();
 				
-				RandomValue rv = ValueFactory.resolve( classType, genericType );
+				AbstractValue rv = ValueFactory.resolve( classType, genericType );
 				
-				return rv.generate();
+				return rv.generateShallow();
 				
 			} else {
 				

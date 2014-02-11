@@ -2,7 +2,7 @@ package org.nicebean;
 
 import java.util.Arrays;
 
-import org.nicebean.randomized.PlainBean;
+import org.nicebean.randomized.JavaBean;
 
 public class JavaBeanPopulator {
     
@@ -12,7 +12,7 @@ public class JavaBeanPopulator {
     
     public static Object getFilledBeanOfType(Class<?> clazz){
         if(clazz != null){
-            return new PlainBean(clazz).generate();
+            return new JavaBean(clazz).generate();
         }
         return null;
     }

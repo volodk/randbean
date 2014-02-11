@@ -5,7 +5,7 @@ import java.util.Random;
 
 import org.nicebean.utils.Assert;
 
-public abstract class AbstractValue implements RandomValue {
+public abstract class AbstractValue implements RandomValue, ShallowRandomValue {
 	
 	protected final Random rnd = new Random();
 	
@@ -27,6 +27,15 @@ public abstract class AbstractValue implements RandomValue {
 	    return doGenerate();
 	}
 	
+	@Override
+	public Object generateShallow() {
+	    return doGenerateShallowValue();
+	}
+	
 	protected abstract Object doGenerate();
+	
+	protected Object doGenerateShallowValue(){
+	    return doGenerate();
+	}
 	
 }

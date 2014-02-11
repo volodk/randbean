@@ -26,8 +26,6 @@ public class BeanOfBeanWithoutRunnerTest {
       Assert.assertNotNull(person.getBestFriend().getBestFriend().getBestFriend());
       Assert.assertNotNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend());
       
-      Assert.assertNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend().getBestFriend());
-	  
 	  System.out.println(person);
 	  
   }

@@ -3,10 +3,11 @@ package org.nicebean.types;
 import java.lang.reflect.Type;
 
 import org.nicebean.randomized.NullValue;
+import org.nicebean.randomized.JavaBean;
 
 public class ValueFactory {
 	
-	public static RandomValue resolve(Class<?> clazz, Type genericType){
+	public static AbstractValue resolve(Class<?> clazz, Type genericType){
 	    
 	    if(clazz != null){ // TODO: replace with another pattern matcher
 	        
@@ -22,6 +23,8 @@ public class ValueFactory {
 	        if( clazz.isEnum() ){
 	            return new org.nicebean.randomized.Enum(clazz);
 	        }
+	        
+	        return new JavaBean(clazz);
 	        
 	    }
 		return new NullValue();

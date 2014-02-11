@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.nicebean.types.AbstractValue;
 import org.nicebean.types.RandomValue;
+import org.nicebean.types.ShallowRandomValue;
 import org.nicebean.types.ValueFactory;
 import org.nicebean.utils.ArrayUtils;
 
@@ -32,7 +33,7 @@ public class Array extends AbstractValue {
 			
 			RandomValue rv = ValueFactory.resolve(componentType, genericType);
 			
-			return fill( componentType, rv, dimensions, 0, d );
+			return fill( componentType, (ShallowRandomValue) rv, dimensions, 0, d );
 			
 		} else {
 			System.err.println("Is not an Array");
@@ -41,7 +42,7 @@ public class Array extends AbstractValue {
 		return null;
 	}
 	
-	private Object fill(final Class<?> klass, final RandomValue rv, int[] dimensions, int from, int to) {
+	private Object fill(final Class<?> klass, final ShallowRandomValue rv, int[] dimensions, int from, int to) {
 		
 		if( from < to ){
 			
@@ -56,7 +57,7 @@ public class Array extends AbstractValue {
 			
 		} else {
 			
-			return rv.generate();
+			return rv.generateShallow();
 		}
 		
 	}
