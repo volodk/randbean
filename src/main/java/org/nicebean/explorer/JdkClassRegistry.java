@@ -68,13 +68,7 @@ public final class JdkClassRegistry {
 
 	public static boolean isJdkClass(Class<?> clazz) {
 		if(clazz != null) {
-			boolean isJdkClass = false;
-			if(clazz.isArray()){
-				isJdkClass = registry.contains( ArrayUtils.getComponentType(clazz) );
-			} else {
-				isJdkClass = registry.contains(clazz);
-			}
-			return isJdkClass;
+			return registry.contains(clazz);
 		} else {
 			System.err.println("Argument class parameter is NULL");
 			return false;

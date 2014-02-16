@@ -32,10 +32,10 @@ public abstract class AbstractValue implements RandomValue, ShallowRandomValue {
 	    return doGenerateShallowValue();
 	}
 	
-	protected abstract Object doGenerate();
-	
 	protected Object doGenerateShallowValue(){
 	    return doGenerate();
 	}
+	
+	protected abstract Object doGenerate();
 	
 }

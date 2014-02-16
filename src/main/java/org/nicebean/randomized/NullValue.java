@@ -5,7 +5,7 @@ import org.nicebean.types.AbstractValue;
 public class NullValue extends AbstractValue {
     
     public NullValue() {
-        this(null);
+        this( Object.class );
     }
 
     public NullValue(Class<?> clazz) {
@@ -14,7 +14,6 @@ public class NullValue extends AbstractValue {
 
     @Override
     protected Object doGenerate() {
-        // TODO Auto-generated method stub
         return null;
     }
 

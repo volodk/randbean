@@ -39,12 +39,12 @@ public class NiceBeanRunner extends BlockJUnit4ClassRunner {
 
 	protected void populate(final Object test) {
 		
-		for (FrameworkField ff : fields) {
+		for (final FrameworkField f : fields) {
 			
-			Field field = ff.getField();
-			Class<?> fieldClass = field.getType();
+			Field field = f.getField();
+			Class<?> classType = field.getType();
 			
-			Node root = Explorer.buildReferenceGraph(fieldClass);
+			Node root = Explorer.buildReferenceGraph(classType);
 	        
 			Object value = Builder.newInstance(root);
 			
