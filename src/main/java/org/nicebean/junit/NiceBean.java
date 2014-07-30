@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import org.nicebean.explorer.Builder;
 import org.nicebean.explorer.Explorer;
-import org.nicebean.explorer.Node;
-import org.nicebean.utils.BeanUtils;
+import org.nicebean.explorer.Structure;
+import org.nicebean.utils.ReflectionUtils;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 1:17:32 PM 
 
@@ -14,15 +14,12 @@ public final class NiceBean {
     private NiceBean() {
     }
     
-    public static void init(Object test){
-        Class<?> testClass = test.getClass();  
-        for( Field f: testClass.getDeclaredFields() ){
+    public static void init(Object testInstance){
+        for( Field f: testInstance.getClass().getDeclaredFields() ){
             if( f.isAnnotationPresent(Nice.class) ){
-                
-                Node root = Explorer.buildReferenceGraph( f.getType() );
+                Structure root = Explorer.structureOf( f.getType() );
                 Object value = Builder.newInstance(root);
-                BeanUtils.setSilently(f, test, value);
-                
+                ReflectionUtils.set(testInstance, f, value);
             }
         }
     }

@@ -64,7 +64,6 @@ public class ArrayUtils {
 			do {
 				type = type.getComponentType();
 			} while( type.isArray() );
-			
 			return type;
 		}
 		return null;

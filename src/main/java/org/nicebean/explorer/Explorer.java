@@ -13,16 +13,16 @@ public class Explorer {
 
     private static final int MAX_DEPTH = 5;
 
-    public static Node buildReferenceGraph(Class<?> rootClazz) {
+    public static Structure structureOf(Class<?> rootClazz) {
 
         return buildRecursively(rootClazz, null, 0, MAX_DEPTH);
     }
 
-    private static Node buildRecursively(Class<?> clazz, Field root, int currDepth, int maxDepth) {
+    private static Structure buildRecursively(Class<?> clazz, Field root, int currDepth, int maxDepth) {
 
         if (currDepth <= maxDepth) {
 
-            Node node = new Node(clazz, root);
+            Structure node = new Structure(clazz, root);
 
             if ( isJdkClass(clazz) || clazz.isArray() || clazz.isEnum() || clazz.isInterface() ) {
 
@@ -37,7 +37,7 @@ public class Explorer {
                 while (it.hasNext() && !isLimitReached) {
                     Field f = it.next();
 
-                    Node child = buildRecursively(f.getType(), f, currDepth + 1, maxDepth);
+                    Structure child = buildRecursively(f.getType(), f, currDepth + 1, maxDepth);
 
                     if (child != null)
                         node.addElement(child);

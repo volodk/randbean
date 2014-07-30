@@ -34,11 +34,7 @@ public final class JdkClassRegistry {
 								registry.add(clazz);
 
 							} catch (ClassNotFoundException e) {
-								System.err
-										.println("Cannot find class definition, see more : "
-												+ e.getMessage());
-							} catch (Throwable e) {
-								// ignore
+							    // ignore
 							}
 						}
 					}

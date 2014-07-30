@@ -2,7 +2,7 @@ package org.nicebean;
 
 import java.util.Arrays;
 
-import org.nicebean.randomized.JavaBean;
+import org.nicebean.values.JavaBean;
 
 public class JavaBeanPopulator {
     

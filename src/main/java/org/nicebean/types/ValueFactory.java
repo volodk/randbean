@@ -3,9 +3,9 @@ package org.nicebean.types;
 import java.lang.reflect.Type;
 
 import org.nicebean.explorer.JdkClassRegistry;
-import org.nicebean.randomized.JavaBean;
-import org.nicebean.randomized.JdkObject;
-import org.nicebean.randomized.NullValue;
+import org.nicebean.values.JavaBean;
+import org.nicebean.values.JdkObject;
+import org.nicebean.values.NullValue;
 
 public class ValueFactory {
 	
@@ -14,13 +14,13 @@ public class ValueFactory {
 	    if(clazz != null){ // TODO: replace with another pattern matcher
 	        
 	        if( clazz.isPrimitive() )
-	            return new org.nicebean.randomized.Primitive(clazz);
+	            return new org.nicebean.values.Primitive(clazz);
 	        
 	        if( clazz.isArray() )
-                return new org.nicebean.randomized.Array(clazz, genericType);
+                return new org.nicebean.values.Array(clazz, genericType);
 	        
 	        if( clazz.isEnum() ){
-	            return new org.nicebean.randomized.Enum(clazz);
+	            return new org.nicebean.values.Enum(clazz);
 	        }
 	        
 	        if( JdkClassRegistry.isJdkClass(clazz) ){

@@ -10,23 +10,23 @@ import java.util.List;
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
-public class Node {
+public class Structure {
 
 	private boolean leaf;
 	private Field field;
 	private Class<?> clazz;
-	private List<Node> elements = new LinkedList<>();
+	private List<Structure> elements = new LinkedList<>();
 	
-	public Node(Class<?> clazz, Field field){
+	public Structure(Class<?> clazz, Field field){
 		this.field = field;
 		this.clazz = clazz;
 	}
 	
-	public Node(Class<?> clazz){
+	public Structure(Class<?> clazz){
 		this(clazz, null);
 	}
 	
-	public List<Node> getElements() {
+	public List<Structure> getElements() {
 		return elements;
 	}
 	
@@ -53,7 +53,7 @@ public class Node {
 		return leaf = true;
 	}
 	
-	public void addElement(Node subElement){
+	public void addElement(Structure subElement){
 		elements.add(subElement);
 	}
 

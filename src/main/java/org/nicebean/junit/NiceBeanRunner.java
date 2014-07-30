@@ -1,7 +1,6 @@
 package org.nicebean.junit;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkField;
@@ -10,8 +9,8 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.nicebean.explorer.Builder;
 import org.nicebean.explorer.Explorer;
-import org.nicebean.explorer.Node;
-import org.nicebean.utils.BeanUtils;
+import org.nicebean.explorer.Structure;
+import org.nicebean.utils.ReflectionUtils;
 
 /**
  * 
@@ -19,36 +18,24 @@ import org.nicebean.utils.BeanUtils;
  *
  */
 public class NiceBeanRunner extends BlockJUnit4ClassRunner {
-
-	private final List<FrameworkField> fields;
 	
-	public NiceBeanRunner(Class<?> clazz) throws InitializationError {
+	public NiceBeanRunner(Class<?> klass) throws InitializationError {
+        super(klass);
+    }
 
-		super(clazz);
-		
-		fields = getTestClass().getAnnotatedFields(Nice.class);
-	}
-	
-	@Override
+    @Override
 	protected Statement methodInvoker(FrameworkMethod method, Object test) {
-		
 		populate(test);
-		
 		return super.methodInvoker(method, test);
 	}
 
-	protected void populate(final Object test) {
-		
-		for (final FrameworkField f : fields) {
-			
+	protected void populate(final Object testInstance) {
+		for (FrameworkField f : getTestClass().getAnnotatedFields(Nice.class) ) {
 			Field field = f.getField();
 			Class<?> classType = field.getType();
-			
-			Node root = Explorer.buildReferenceGraph(classType);
-	        
+			Structure root = Explorer.structureOf(classType);
 			Object value = Builder.newInstance(root);
-			
-			BeanUtils.setSilently(field, test, value);
+			ReflectionUtils.set(testInstance, field, value);
 		}
 	}
 

@@ -15,7 +15,7 @@ public class MatrixTest {
     int[][] plane;
 
     @Nice
-    int[] space[][];
+    int space[][][];
 
     @Test
     public void test() {

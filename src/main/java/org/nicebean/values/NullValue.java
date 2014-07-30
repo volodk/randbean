@@ -1,4 +1,4 @@
-package org.nicebean.randomized;
+package org.nicebean.values;
 
 import org.nicebean.types.AbstractValue;
 
