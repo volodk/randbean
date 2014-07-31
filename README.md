@@ -13,7 +13,7 @@ bean.setPropertyE(...);
 bean.setPropertyZ(...);
 ```
 ### What to do
-Mark an instance field(s) of your test with *@Randomize* annotation and that's it. Basic idea is the following
+Mark an instance field(s) of your test with ```@Randomize``` annotation and that's it. Basic idea is the following
 ```java
 @Randomize private Pojo bean;
 
