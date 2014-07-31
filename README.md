@@ -1,4 +1,4 @@
-nicebean
+randbean
 ========
 
 <h3>Summary</h3> Populates java beans with random dummy data and makes your jUnit tests more lean
@@ -13,7 +13,8 @@ bean.setPropertyE(...);
 ...
 bean.setPropertyZ(...);
 ```
-<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Randomize</b> annotation and that's it. Basic idea is the following:
+
+<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Randomize</b> annotation and that's it. Basic idea is the following
 ```
 @Randomize private Pojo bean;
 
@@ -21,6 +22,7 @@ bean.setPropertyZ(...);
   bean.getPropertyA() // null-safe access to generated data
 }
 ```
+
 <h3>Installation</h3>
 It is not pushed to any public Nexus, so you have to do some work to get it in your app
 ```
