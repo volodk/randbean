@@ -3,7 +3,7 @@
 Populates java beans with random dummy data and makes your jUnit tests more lean
 ### Use case
 If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
-```
+```java
 bean.setPropertyA(...);
 bean.setPropertyB(...);
 bean.setPropertyC(...);
@@ -14,7 +14,7 @@ bean.setPropertyZ(...);
 ```
 ### What to do
 Mark an instance field(s) of your test with *@Randomize* annotation and that's it. Basic idea is the following
-```
+```java
 @Randomize private Pojo bean;
 
 @Test public void thisIsAtest(){
@@ -29,7 +29,7 @@ cd randbean
 mvn install
 ```
 After installing the jar locally you can include it in your pom.xml
-```
+```xml
 <dependency>
   <groupId>org.randbean</groupId>
   <artifactId>randbean</artifactId>
