@@ -1,9 +1,8 @@
-randbean
-========
-
-<h3>Summary</h3> Populates java beans with random dummy data and makes your jUnit tests more lean
-
-<h3>Use case</h3> If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
+## randbean
+### Summary
+Populates java beans with random dummy data and makes your jUnit tests more lean
+### Use case
+If you need to fill a pojo object with dummy data and you really want to avoid tons of keystrokes like these
 ```
 bean.setPropertyA(...);
 bean.setPropertyB(...);
@@ -13,8 +12,8 @@ bean.setPropertyE(...);
 ...
 bean.setPropertyZ(...);
 ```
-
-<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Randomize</b> annotation and that's it. Basic idea is the following
+### What to do
+Mark an instance field(s) of your test with *@Randomize* annotation and that's it. Basic idea is the following
 ```
 @Randomize private Pojo bean;
 
@@ -22,8 +21,7 @@ bean.setPropertyZ(...);
   bean.getPropertyA() // null-safe access to generated data
 }
 ```
-
-<h3>Installation</h3>
+### Installation
 It is not pushed to any public Nexus, so you have to do some work to get it in your app
 ```
 git clone git@github.com:volodk/randbean.git
@@ -39,7 +37,7 @@ After installing the jar locally you can include it in your pom.xml
   <scope>test</scope>
 </dependency>
 ```
-<h2>License</h2>
+### License
 ```
 This software is licensed under the Apache 2 license, quoted below.
 
