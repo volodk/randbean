@@ -22,7 +22,22 @@ bean.setPropertyZ(...);
   bean.getPropertyA() // null-safe access to generated data
 }
 ```
-
+<h3>Installation</h3>
+It is not pushed to any public Nexus, so you have to do some work to get it in your app
+```
+git clone git@github.com:volodk/randbean.git
+cd randbean
+mvn install
+```
+After installing the jar locally you can include it in your pom.xml
+```
+<dependency>
+  <groupId>org.randbean</groupId>
+  <artifactId>randbean</artifactId>
+  <version>0.0.1</version>
+  <scope>test</scope>
+</dependency>
+```
 <h2>License</h2>
 ```
 This software is licensed under the Apache 2 license, quoted below.
