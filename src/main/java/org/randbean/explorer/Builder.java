@@ -1,8 +1,5 @@
 package org.randbean.explorer;
 
-import java.lang.reflect.Type;
-
-import org.randbean.types.AbstractValue;
 import org.randbean.types.ValueFactory;
 import org.randbean.utils.ReflectionUtils;
 
@@ -17,10 +14,7 @@ public class Builder {
         if (struct != null) {
             Class<?> classType = struct.getClassType();
             if (struct.isLeaf()) {
-                Type genericType = struct.getGenericType();
-                AbstractValue rv = ValueFactory.resolve(classType, genericType);
-                return rv.generateShallow();
-
+                return ValueFactory.resolve(struct).generate();
             } else {
                 Object instance = ReflectionUtils.newInstance(classType);
                 for (ClassStructure element : struct.getElements()) {

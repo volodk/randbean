@@ -2,22 +2,19 @@ package org.randbean.values;
 
 import org.randbean.explorer.Builder;
 import org.randbean.explorer.Explorer;
-import org.randbean.types.AbstractValue;
-import org.randbean.utils.ReflectionUtils;
+import org.randbean.types.Randomizable;
 
-public class JavaBean extends AbstractValue {
+public class JavaBean implements Randomizable{
 
+    private Class<?> clazz;
+    
     public JavaBean(Class<?> clazz) {
-        super(clazz);
+        this.clazz = clazz;
     }
 
     @Override
-    protected Object doGenerate() {
+    public Object generate() {
         return Builder.newInstance( Explorer.explore(clazz) );
     }
 
-    @Override
-    protected Object doGenerateShallowValue() {
-        return ReflectionUtils.newInstance(clazz);
-    }
 }

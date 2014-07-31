@@ -1,23 +1,24 @@
 package org.randbean.values;
 
-import org.randbean.types.AbstractValue;
+import org.randbean.types.Randomizable;
 
-public class Date extends AbstractValue {
+public class Date implements Randomizable {
 
-	Date(Class<?> clazz) {
-		super(clazz);
+    private Class<?> clazz;
+    
+	public Date(Class<?> clazz) {
+		this.clazz = clazz;
 	}
 	
 	@Override
-	protected Object doGenerate() {
-		
+    public Object generate() {
 		if( java.util.Date.class.isAssignableFrom(clazz) ){
 			try {
 				return clazz.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
 				System.err.println("Cannot instantiate 'Date' instance, datails :" + e.getMessage());
 			}
-		} else{
+		} else {
 			System.err.println("Is not a Date");
 		}
 		return null;

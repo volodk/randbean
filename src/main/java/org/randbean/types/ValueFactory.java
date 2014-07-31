@@ -2,14 +2,19 @@ package org.randbean.types;
 
 import java.lang.reflect.Type;
 
+import org.randbean.explorer.ClassStructure;
 import org.randbean.explorer.JdkClassRegistry;
 import org.randbean.values.JavaBean;
 import org.randbean.values.JdkObject;
 import org.randbean.values.NullValue;
 
 public class ValueFactory {
+    
+    public static Randomizable resolve(ClassStructure s){
+        return resolve(s.getClassType(), s.getGenericType());
+    }
 	
-	public static AbstractValue resolve(Class<?> clazz, Type genericType){
+	public static Randomizable resolve(Class<?> clazz, Type genericType){
 	    
 	    if(clazz != null){ // TODO: replace with another pattern matcher
 	        

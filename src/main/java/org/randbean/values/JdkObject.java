@@ -1,32 +1,18 @@
 package org.randbean.values;
 
-import org.randbean.types.AbstractValue;
+import org.randbean.types.Randomizable;
 
-public class JdkObject extends AbstractValue{
+public class JdkObject implements Randomizable {
 
-    private final AbstractValue generator;
+    private Class<?> clazz;
     
     public JdkObject(Class<?> clazz) {
-        super(clazz);
-        
-        generator = resolveValueGenerator();
-    }
-
-    private final AbstractValue resolveValueGenerator() {
-        
-        if( String.class.equals(clazz) )
-            return new org.randbean.values.String(clazz);
-        
-        if( Date.class.equals(clazz) )
-            return new org.randbean.values.Date(clazz);
-        
-        return new NullValue();
-        
+        this.clazz = clazz;
     }
 
     @Override
-    protected Object doGenerate() {
-        return generator.generate();
+    public Object generate() {
+        return null;
     }
 
 }

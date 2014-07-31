@@ -5,14 +5,14 @@ import java.util.List;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 5:52:56 PM 
 
-public class Assert {
+public class Preconditions {
     
     public interface Condition {
         boolean isTrue(List<Object> context);
     }
     
     public static void notNull(Object obj){
-        Assert.check(new Condition() {
+        Preconditions.check(new Condition() {
             @Override
             public boolean isTrue(List<Object> context) {
                 return null != context.get(0);
@@ -21,7 +21,7 @@ public class Assert {
     }
     
     public static void notNull(Object first, Object second){
-        Assert.check(new Condition() {
+        Preconditions.check(new Condition() {
             @Override
             public boolean isTrue(List<Object> context) {
                 return null != context.get(0) && null != context.get(1);
@@ -30,7 +30,7 @@ public class Assert {
     }
     
     public static void notNull(Object first, Object second, Object third){
-        Assert.check(new Condition() {
+        Preconditions.check(new Condition() {
             @Override
             public boolean isTrue(List<Object> context) {
                 return null != context.get(0) && null != context.get(1);

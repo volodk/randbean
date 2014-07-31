@@ -1,18 +1,23 @@
 package org.randbean.values;
 
-import org.randbean.types.AbstractValue;
+import java.util.Random;
+
+import org.randbean.types.Randomizable;
 /**
  * 
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
 
-public class String extends AbstractValue {
+public class String implements Randomizable {
 	
+    private static final Random RND = new Random();
 	private static final int MAX_LENGTH = 20;
+	
+	private Class<?> clazz;
 
     public String(Class<?> clazz) {
-		super(clazz);
+		this.clazz = clazz;
 	}
     
     public String() {
@@ -20,15 +25,14 @@ public class String extends AbstractValue {
     }
 
 	@Override
-	protected Object doGenerate() {
-		
+	public Object generate() {
 		if( java.lang.String.class.isAssignableFrom(clazz) ){
-			int length = 1 + rnd.nextInt( MAX_LENGTH );
+			int length = 1 + RND.nextInt( MAX_LENGTH );
 			char[] buff = new char[length];
 			for(int i = 0; i < length; i++){
 				char ch = 0;
 				do {
-					ch = (char) ( 'A' + rnd.nextInt('z' - 'A' + 1));
+					ch = (char) ( 'A' + RND.nextInt('z' - 'A' + 1));
 				} while( ch > 'Z' && ch < 'a' );
 				buff[i] = ch;
 			}
@@ -37,7 +41,6 @@ public class String extends AbstractValue {
 			System.err.println("Is not a String");
 		}
 		return null;
-		
 	}
 
 }

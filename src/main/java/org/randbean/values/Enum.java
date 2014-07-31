@@ -1,18 +1,20 @@
 package org.randbean.values;
 
-import org.randbean.types.AbstractValue;
+import org.randbean.types.Randomizable;
 import org.randbean.utils.ArrayUtils;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 4:44:56 PM 
 
-public class Enum extends AbstractValue {
+public class Enum implements Randomizable {
+    
+    private Class<?> clazz;
 
-    public Enum(Class<?> enumClass) {
-        super(enumClass);
+    public Enum(Class<?> clazz) {
+        this.clazz = clazz;
     }
 
     @Override
-    protected Object doGenerate() {
+    public Object generate() {
         if (clazz.isEnum()) {
             return ArrayUtils.randomElement(clazz.getEnumConstants());
         }

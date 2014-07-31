@@ -14,18 +14,18 @@ public class Explorer {
 
     private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.depth", "5"));
 
-    public static ClassStructure explore(Class<?> rootClazz) {
-        Objects.requireNonNull(rootClazz, "Target class cannot be null");
-        return explore(rootClazz, null, 0);
+    public static ClassStructure explore(Class<?> klass) {
+        Objects.requireNonNull(klass, "Target class cannot be null");
+        return explore(klass, null, 0);
     }
 
-    private static ClassStructure explore(Class<?> clazz, Field root, int depth) {
+    private static ClassStructure explore(Class<?> klass, Field field, int depth) {
         if (depth <= MAX_DEPTH) {
-            ClassStructure node = new ClassStructure(clazz, root);
-            if ( isJdkClass(clazz) || clazz.isArray() || clazz.isEnum() || clazz.isInterface() ) {
+            ClassStructure node = ClassStructure.from(klass, field);
+            if ( isJdkClass(klass) || klass.isArray() || klass.isEnum() || klass.isInterface() ) {
                 node.markAsLeaf();
             } else {
-                Iterator<Field> it = Arrays.asList(clazz.getDeclaredFields()).iterator();
+                Iterator<Field> it = Arrays.asList(klass.getDeclaredFields()).iterator();
                 boolean isLimitReached = false;
                 while (it.hasNext() && !isLimitReached) {
                     Field f = it.next();

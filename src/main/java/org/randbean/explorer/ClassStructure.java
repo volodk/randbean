@@ -14,16 +14,16 @@ public class ClassStructure {
 
 	private boolean leaf;
 	private Field field;
-	private Class<?> clazz;
+	private Class<?> klass;
 	private List<ClassStructure> elements = new LinkedList<>();
 	
-	public ClassStructure(Class<?> clazz, Field field){
+	public ClassStructure(Class<?> klass, Field field){
 		this.field = field;
-		this.clazz = clazz;
+		this.klass = klass;
 	}
 	
-	public ClassStructure(Class<?> clazz){
-		this(clazz, null);
+	public ClassStructure(Class<?> klass){
+		this(klass, null);
 	}
 	
 	public List<ClassStructure> getElements() {
@@ -35,7 +35,7 @@ public class ClassStructure {
 	}
 	
 	public Class<?> getClassType() {
-		return clazz;
+		return klass;
 	}
 	
 	public Type getGenericType(){
@@ -55,6 +55,10 @@ public class ClassStructure {
 	
 	public void addElement(ClassStructure subElement){
 		elements.add(subElement);
+	}
+	
+	public static ClassStructure from(Class<?> klass, Field field){
+	    return new ClassStructure(klass, field);
 	}
 
 }

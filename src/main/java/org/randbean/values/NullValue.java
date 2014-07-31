@@ -1,19 +1,11 @@
 package org.randbean.values;
 
-import org.randbean.types.AbstractValue;
+import org.randbean.types.Randomizable;
 
-public class NullValue extends AbstractValue {
+public class NullValue implements Randomizable {
     
-    public NullValue() {
-        this( Object.class );
-    }
-
-    public NullValue(Class<?> clazz) {
-        super(clazz);
-    }
-
     @Override
-    protected Object doGenerate() {
+    public Object generate() {
         return null;
     }
 
