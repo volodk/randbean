@@ -13,10 +13,10 @@ bean.setPropertyE(...);
 ...
 bean.setPropertyZ(...);
 ```
-<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Nice</b> annotation and that's it. Basic idea is the following:
+<h3>What to do</h3> Mark an instance field(s) of your test with <b>@Randomize</b> annotation and that's it. Basic idea is the following:
 
 ```
-@Nice private Pojo bean;
+@Randomize private Pojo bean;
 
 @Test public void thisIsAtest(){
   bean.getPropertyA() // null-safe access to generated data
