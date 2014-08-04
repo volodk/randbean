@@ -1,7 +1,7 @@
 package org.randbean.explorer;
 
-import org.randbean.types.ValueFactory;
 import org.randbean.utils.ReflectionUtils;
+import org.randbean.values.ValueFactory;
 
 /**
  * 
@@ -10,18 +10,18 @@ import org.randbean.utils.ReflectionUtils;
  */
 public class Builder {
 
-    public static Object newInstance(ClassStructure struct) {
+    public static Object newInstance(ClassNode struct) {
         if (struct != null) {
-            Class<?> classType = struct.getClassType();
             if (struct.isLeaf()) {
                 return ValueFactory.resolve(struct).generate();
             } else {
-                Object instance = ReflectionUtils.newInstance(classType);
-                for (ClassStructure element : struct.getElements()) {
+                Class<?> rootObjectType = struct.getClassType();
+                Object rootObject = ReflectionUtils.newInstance(rootObjectType);
+                for ( ClassNode element : struct.getElements() ) {
                     Object value = newInstance(element);
-                    ReflectionUtils.set(instance, element.getField(), value);
+                    ReflectionUtils.set(rootObject, element.getField(), value);
                 }
-                return instance;
+                return rootObject;
             }
         }
         return null;

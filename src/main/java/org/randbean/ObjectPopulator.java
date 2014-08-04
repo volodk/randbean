@@ -2,19 +2,17 @@ package org.randbean;
 
 import java.util.Arrays;
 
-import org.randbean.values.JavaBean;
+import org.randbean.explorer.Builder;
+import org.randbean.explorer.Explorer;
 
-public class JavaBeanPopulator {
+public class ObjectPopulator {
     
-    private JavaBeanPopulator(){
+    private ObjectPopulator(){
         
     }
     
-    public static Object getFilledBeanOfType(Class<?> clazz){
-        if(clazz != null){
-            return new JavaBean(clazz).generate();
-        }
-        return null;
+    public static Object getObjectOfType(Class<?> clazz){
+        return Builder.newInstance(Explorer.explore(clazz));
     }
     
     public static class UseCase{
@@ -31,7 +29,7 @@ public class JavaBeanPopulator {
     }
     
     public static void main(String[] args) {
-        Object o = getFilledBeanOfType(UseCase.class);
+        Object o = getObjectOfType(UseCase.class);
         System.out.println(o);
     }
     

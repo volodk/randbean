@@ -3,7 +3,8 @@ package org.randbean.explorer;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Objects;
+
+import org.randbean.utils.Preconditions;
 
 /**
  * 
@@ -14,35 +15,46 @@ public class Explorer {
 
     private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.depth", "5"));
 
-    public static ClassStructure explore(Class<?> klass) {
-        Objects.requireNonNull(klass, "Target class cannot be null");
+    public static ClassNode explore(Class<?> klass) {
+        if( klass == null) return null;
         return explore(klass, null, 0);
     }
+    
+    public static ClassNode explore(Field field) {
+        Preconditions.notNull(field);
+        return explore(field.getType(), field, 0);
+    }
+    
+    public static ClassNode explore(Class<?> klass, Field field) {
+        Preconditions.notNull(klass);
+        Preconditions.notNull(field);
+        return explore(klass, field, 0);
+    }
 
-    private static ClassStructure explore(Class<?> klass, Field field, int depth) {
+    private static ClassNode explore(Class<?> clazz, Field field, int depth) {
         if (depth <= MAX_DEPTH) {
-            ClassStructure node = ClassStructure.from(klass, field);
-            if ( isJdkClass(klass) || klass.isArray() || klass.isEnum() || klass.isInterface() ) {
+            ClassNode node = ClassNode.from(clazz, field);
+            if ( isDirectlyInstantiable(clazz) ) {
                 node.markAsLeaf();
             } else {
-                Iterator<Field> it = Arrays.asList(klass.getDeclaredFields()).iterator();
-                boolean isLimitReached = false;
-                while (it.hasNext() && !isLimitReached) {
+                Iterator<Field> it = Arrays.asList(clazz.getDeclaredFields()).iterator();
+                while ( it.hasNext() ) {
                     Field f = it.next();
-                    ClassStructure child = explore(f.getType(), f, depth + 1);
+                    ClassNode child = explore(f.getType(), f, depth + 1);
                     if (child != null)
                         node.addElement(child);
                     else {
-                        isLimitReached = node.markAsLeaf();
+                        node.markAsLeaf();
                     }
                 }
             }
             return node;
+        } else {
+            return null;
         }
-        return null;
     }
 
-    private static boolean isJdkClass(Class<?> clazz) {
-        return JdkClassRegistry.isJdkClass(clazz);
+    private static boolean isDirectlyInstantiable(Class<?> klass) {
+        return JdkClasses.isKnown(klass) || klass.isArray() || klass.isEnum() || klass.isInterface();
     }
 }

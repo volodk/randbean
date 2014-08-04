@@ -14,11 +14,12 @@ public final class BeanRandomizer {
     }
     
     public static void init(Object testInstance){
-        for( Field field: testInstance.getClass().getDeclaredFields() ){
-            if( field.isAnnotationPresent(Randomize.class) ){
-                Object generatedValue = Builder.newInstance( Explorer.explore( field.getType() ));
-                ReflectionUtils.set(testInstance, field, generatedValue);
+        if( testInstance != null )
+            for( Field field: testInstance.getClass().getDeclaredFields() ){
+                if( field.isAnnotationPresent(Randomize.class) ){
+                    Object generatedValue = Builder.newInstance(Explorer.explore(field));
+                    ReflectionUtils.set(testInstance, field, generatedValue);
+                }
             }
-        }
     }
 }

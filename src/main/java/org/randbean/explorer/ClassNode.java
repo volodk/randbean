@@ -10,23 +10,23 @@ import java.util.List;
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  *
  */
-public class ClassStructure {
+public class ClassNode {
 
 	private boolean leaf;
 	private Field field;
 	private Class<?> klass;
-	private List<ClassStructure> elements = new LinkedList<>();
+	private List<ClassNode> elements = new LinkedList<>();
 	
-	public ClassStructure(Class<?> klass, Field field){
+	public ClassNode(Class<?> klass, Field field){
 		this.field = field;
 		this.klass = klass;
 	}
 	
-	public ClassStructure(Class<?> klass){
+	public ClassNode(Class<?> klass){
 		this(klass, null);
 	}
 	
-	public List<ClassStructure> getElements() {
+	public List<ClassNode> getElements() {
 		return elements;
 	}
 	
@@ -49,16 +49,20 @@ public class ClassStructure {
 		return leaf;
 	}
 	
-	public boolean markAsLeaf(){
-		return leaf = true;
+	public void markAsLeaf(){
+		leaf = true;
 	}
 	
-	public void addElement(ClassStructure subElement){
+	public void addElement(ClassNode subElement){
 		elements.add(subElement);
 	}
 	
-	public static ClassStructure from(Class<?> klass, Field field){
-	    return new ClassStructure(klass, field);
+	public static ClassNode from(Class<?> klass, Field field){
+	    return new ClassNode(klass, field);
 	}
+	
+	public static ClassNode from(Field field){
+        return new ClassNode(field.getType(), field);
+    }
 
 }

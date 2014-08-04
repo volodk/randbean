@@ -8,7 +8,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.randbean.explorer.Builder;
-import org.randbean.explorer.ClassStructure;
+import org.randbean.explorer.ClassNode;
 import org.randbean.explorer.Explorer;
 import org.randbean.utils.ReflectionUtils;
 
@@ -30,13 +30,13 @@ public class BeanRandomizerRunner extends BlockJUnit4ClassRunner {
 	}
 
 	protected void populate(final Object testInstance) {
-		for (FrameworkField f : getTestClass().getAnnotatedFields(Randomize.class) ) {
-			Field field = f.getField();
-			Class<?> classType = field.getType();
-			ClassStructure root = Explorer.explore(classType);
-			Object value = Builder.newInstance(root);
-			ReflectionUtils.set(testInstance, field, value);
-		}
+	    if( testInstance != null )
+    		for (FrameworkField f : getTestClass().getAnnotatedFields(Randomize.class) ) {
+    			Field field = f.getField();
+    			ClassNode root = Explorer.explore(field);
+    			Object value = Builder.newInstance(root);
+    			ReflectionUtils.set(testInstance, field, value);
+    		}
 	}
 
 }

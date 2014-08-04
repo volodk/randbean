@@ -3,12 +3,14 @@ package org.randbean.values;
 import org.randbean.explorer.Builder;
 import org.randbean.explorer.Explorer;
 import org.randbean.types.Randomizable;
+import org.randbean.utils.Preconditions;
 
-public class JavaBean implements Randomizable{
+class RandomizedJavaBean implements Randomizable{
 
     private Class<?> clazz;
     
-    public JavaBean(Class<?> clazz) {
+    public RandomizedJavaBean(Class<?> clazz) {
+        Preconditions.notNull(clazz);
         this.clazz = clazz;
     }
 
