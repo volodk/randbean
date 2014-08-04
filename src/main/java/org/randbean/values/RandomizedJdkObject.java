@@ -10,7 +10,7 @@ import org.randbean.utils.Preconditions;
 class RandomizedJdkObject implements Randomizable {
 
     private Class<?> clazz;
-    
+
     public RandomizedJdkObject(Class<?> clazz) {
         Preconditions.notNull(clazz);
         this.clazz = clazz;
@@ -18,14 +18,21 @@ class RandomizedJdkObject implements Randomizable {
 
     @Override
     public Object generate() {
-        if( String.class.equals(clazz) )
-            return new RandomizedString().generate();
-        if( Date.class.isAssignableFrom(clazz) )
-            return new RandomizedDate(clazz).generate();
-        if( Map.class.isAssignableFrom(clazz))
-            return new RandomizedMap(clazz).generate();
-        if( Collection.class.isAssignableFrom(clazz))
-            return new RandomizedCollection(clazz).generate();
-        return null;
+        Randomizable value = new NullValue();
+
+        if (String.class.equals(clazz)) {
+            value = new RandomizedString();
+
+        } else if (Date.class.isAssignableFrom(clazz)) {
+            value = new RandomizedDate(clazz);
+
+        } else if (Map.class.isAssignableFrom(clazz)) {
+            value = new RandomizedMap(clazz);
+
+        } else if (Collection.class.isAssignableFrom(clazz)) {
+            value = new RandomizedCollection(clazz);
+
+        }
+        return value.generate();
     }
 }

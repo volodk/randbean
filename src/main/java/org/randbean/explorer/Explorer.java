@@ -13,11 +13,11 @@ import org.randbean.utils.Preconditions;
  */
 public class Explorer {
 
-    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.depth", "5"));
+    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "5"));
 
-    public static ClassNode explore(Class<?> klass) {
-        if( klass == null) return null;
-        return explore(klass, null, 0);
+    public static ClassNode explore(Class<?> clazz) {
+        Preconditions.notNull(clazz);
+        return explore(clazz, null, 0);
     }
     
     public static ClassNode explore(Field field) {
@@ -25,10 +25,10 @@ public class Explorer {
         return explore(field.getType(), field, 0);
     }
     
-    public static ClassNode explore(Class<?> klass, Field field) {
-        Preconditions.notNull(klass);
+    public static ClassNode explore(Class<?> clazz, Field field) {
+        Preconditions.notNull(clazz);
         Preconditions.notNull(field);
-        return explore(klass, field, 0);
+        return explore(clazz, field, 0);
     }
 
     private static ClassNode explore(Class<?> clazz, Field field, int depth) {
@@ -54,7 +54,7 @@ public class Explorer {
         }
     }
 
-    private static boolean isDirectlyInstantiable(Class<?> klass) {
-        return JdkClasses.isKnown(klass) || klass.isArray() || klass.isEnum() || klass.isInterface();
+    private static boolean isDirectlyInstantiable(Class<?> clazz) {
+        return JdkClasses.isKnown(clazz) || clazz.isArray() || clazz.isEnum() || clazz.isInterface();
     }
 }

@@ -1,6 +1,7 @@
 package org.randbean;
 
-import junit.framework.Assert;
+
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +17,11 @@ public class BeanOfBeanTest {
   @Test
   public void test() {
     
-	  Assert.assertNotNull(person);
-	  Assert.assertNotNull(person.getBestFriend());
-	  Assert.assertNotNull(person.getBestFriend().getBestFriend());
-	  Assert.assertNotNull(person.getBestFriend().getBestFriend().getBestFriend());
-	  Assert.assertNotNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend());
+	  assertNotNull(person);
+	  assertNotNull(person.getBestFriend());
+	  assertNotNull(person.getBestFriend().getBestFriend());
+	  assertNotNull(person.getBestFriend().getBestFriend().getBestFriend());
+	  assertNotNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend());
 	  
 	  System.out.println(person);
 	  

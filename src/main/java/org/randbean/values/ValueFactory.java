@@ -11,31 +11,19 @@ public class ValueFactory {
     }
 	
     public static Randomizable resolve(Class<?> clazz){
-	    
 	    if( clazz != null ){
-	        
 	        if( clazz.isPrimitive() ){
 	            return new org.randbean.values.PrimitiveValue(clazz);
-	        }
-	        
-	        if( clazz.isArray() ){
+	        } else if( clazz.isArray() ){
                 return new org.randbean.values.RandomizedArray(clazz);
-	        }
-	        
-	        if( clazz.isEnum() ){
+	        } else if( clazz.isEnum() ){
 	            return new org.randbean.values.RandomizedEnum(clazz);
-	        }
-	        
-	        if( JdkClasses.isKnown(clazz) ){
-	            return new RandomizedJdkObject(clazz);
-	        }
-	        
-	        if( clazz.isInterface() ){
+	        } else if( clazz.isInterface() ){
                 return new ProxiedObject(clazz);
-            }
-	        
-	        return new RandomizedJavaBean(clazz);
-	        
+            } else if( JdkClasses.isKnown(clazz) ){
+	            return new RandomizedJdkObject(clazz);
+	        } else 
+	            return new RandomizedJavaBean(clazz);
 	    }
 		return new NullValue();
 	}
