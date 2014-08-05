@@ -8,17 +8,17 @@ import org.randbean.utils.ReflectionUtils;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 1:17:32 PM 
 
-public final class BeanRandomizer {
+public final class Randomizer {
     
-    private BeanRandomizer() {
+    private Randomizer() {
     }
     
-    public static void init(Object testInstance){
-        if( testInstance != null )
-            for( Field field: testInstance.getClass().getDeclaredFields() ){
+    public static void populate(Object obj){
+        if( obj != null )
+            for( Field field: obj.getClass().getDeclaredFields() ){
                 if( field.isAnnotationPresent(Randomize.class) ){
                     Object generatedValue = Builder.newInstance(Explorer.explore(field));
-                    ReflectionUtils.set(testInstance, field, generatedValue);
+                    ReflectionUtils.set(obj, field, generatedValue);
                 }
             }
     }

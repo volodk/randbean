@@ -5,10 +5,10 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.randbean.junit.BeanRandomizerRunner;
+import org.randbean.junit.RandomizeRunner;
 import org.randbean.junit.Randomize;
 
-@RunWith(BeanRandomizerRunner.class)
+@RunWith(RandomizeRunner.class)
 public class MatrixTest {
 
     @Randomize

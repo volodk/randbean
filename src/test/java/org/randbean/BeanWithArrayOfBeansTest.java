@@ -2,11 +2,11 @@ package org.randbean;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.randbean.junit.BeanRandomizerRunner;
+import org.randbean.junit.RandomizeRunner;
 import org.randbean.junit.Randomize;
 import org.randbean.samplebeans.AdvancedPerson;
 
-@RunWith(BeanRandomizerRunner.class)
+@RunWith(RandomizeRunner.class)
 public class BeanWithArrayOfBeansTest {
 
   @Randomize AdvancedPerson bean;

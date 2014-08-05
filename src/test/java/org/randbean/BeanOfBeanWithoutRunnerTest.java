@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.randbean.junit.BeanRandomizer;
+import org.randbean.junit.Randomizer;
 import org.randbean.junit.Randomize;
 import org.randbean.samplebeans.Person;
 
@@ -15,7 +15,7 @@ public class BeanOfBeanWithoutRunnerTest {
   
   @Before
   public void setUp() throws Exception{
-      BeanRandomizer.init(this);
+      Randomizer.populate(this);
   }
 
   @Test

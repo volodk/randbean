@@ -5,11 +5,11 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.randbean.junit.BeanRandomizerRunner;
+import org.randbean.junit.RandomizeRunner;
 import org.randbean.junit.Randomize;
 import org.randbean.samplebeans.Person;
 
-@RunWith(BeanRandomizerRunner.class)
+@RunWith(RandomizeRunner.class)
 public class BeanOfBeanTest {
 
   @Randomize Person person;
