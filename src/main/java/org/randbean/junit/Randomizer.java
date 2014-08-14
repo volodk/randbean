@@ -2,8 +2,8 @@ package org.randbean.junit;
 
 import java.lang.reflect.Field;
 
-import org.randbean.explorer.Builder;
-import org.randbean.explorer.Explorer;
+import org.randbean.core.Builder;
+import org.randbean.core.Explorer;
 import org.randbean.utils.ReflectionUtils;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 1:17:32 PM 

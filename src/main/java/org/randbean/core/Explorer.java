@@ -1,8 +1,6 @@
-package org.randbean.explorer;
+package org.randbean.core;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Iterator;
 
 import org.randbean.utils.Preconditions;
 
@@ -13,18 +11,18 @@ import org.randbean.utils.Preconditions;
  */
 public class Explorer {
 
-    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "5"));
+    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "2"));
 
     public static ClassNode explore(Class<?> clazz) {
         Preconditions.notNull(clazz);
         return explore(clazz, null, 0);
     }
-    
+
     public static ClassNode explore(Field field) {
         Preconditions.notNull(field);
         return explore(field.getType(), field, 0);
     }
-    
+
     public static ClassNode explore(Class<?> clazz, Field field) {
         Preconditions.notNull(clazz);
         Preconditions.notNull(field);
@@ -32,14 +30,14 @@ public class Explorer {
     }
 
     private static ClassNode explore(Class<?> clazz, Field field, int depth) {
-        if (depth <= MAX_DEPTH) {
+        if (depth > MAX_DEPTH) {
+            return null;
+        } else {
             ClassNode node = ClassNode.from(clazz, field);
-            if ( isDirectlyInstantiable(clazz) ) {
+            if (isDirectlyInstantiable(clazz)) {
                 node.markAsLeaf();
             } else {
-                Iterator<Field> it = Arrays.asList(clazz.getDeclaredFields()).iterator();
-                while ( it.hasNext() ) {
-                    Field f = it.next();
+                for (Field f : clazz.getDeclaredFields()) {
                     ClassNode child = explore(f.getType(), f, depth + 1);
                     if (child != null)
                         node.addElement(child);
@@ -49,8 +47,6 @@ public class Explorer {
                 }
             }
             return node;
-        } else {
-            return null;
         }
     }
 

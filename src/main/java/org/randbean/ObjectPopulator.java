@@ -2,8 +2,8 @@ package org.randbean;
 
 import java.util.Arrays;
 
-import org.randbean.explorer.Builder;
-import org.randbean.explorer.Explorer;
+import org.randbean.core.Builder;
+import org.randbean.core.Explorer;
 
 public class ObjectPopulator {
     

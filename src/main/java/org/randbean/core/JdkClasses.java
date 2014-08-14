@@ -1,4 +1,4 @@
-package org.randbean.explorer;
+package org.randbean.core;
 
 import java.io.BufferedReader;
 import java.io.File;

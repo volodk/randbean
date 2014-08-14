@@ -1,7 +1,7 @@
 package org.randbean.values;
 
-import org.randbean.explorer.Builder;
-import org.randbean.explorer.Explorer;
+import org.randbean.core.Builder;
+import org.randbean.core.Explorer;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 

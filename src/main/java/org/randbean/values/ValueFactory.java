@@ -1,7 +1,7 @@
 package org.randbean.values;
 
-import org.randbean.explorer.ClassNode;
-import org.randbean.explorer.JdkClasses;
+import org.randbean.core.ClassNode;
+import org.randbean.core.JdkClasses;
 import org.randbean.types.Randomizable;
 
 public class ValueFactory {
