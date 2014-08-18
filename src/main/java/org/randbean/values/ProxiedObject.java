@@ -7,18 +7,9 @@ import org.randbean.utils.Preconditions;
 
 class ProxiedObject implements Randomizable {
 
-    private Class<?> clazz;
-
-    public ProxiedObject(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        Preconditions.assertThat(clazz.isInterface(), new IllegalArgumentException("Is not an interface, class : "
-                + clazz));
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
-
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
         return null;
     }
 

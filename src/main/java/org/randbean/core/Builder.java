@@ -1,5 +1,6 @@
 package org.randbean.core;
 
+import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 import org.randbean.utils.ReflectionUtils;
 import org.randbean.values.ValueFactory;
@@ -14,13 +15,15 @@ public class Builder {
     public static Object newInstance(ClassNode node) {
         Preconditions.notNull(node);
         if (node.isLeaf()) {
-            return ValueFactory.resolve(node).generate();
+            Class<?> clazz = node.getClassType();
+            Randomizable r = ValueFactory.resolve(clazz);
+            return r.instantiate(clazz, false );
         } else {
             Class<?> rootObjectType = node.getClassType();
             Object rootObject = ReflectionUtils.newInstance(rootObjectType);
-            for (ClassNode element : node.getElements()) {
-                Object value = newInstance(element);
-                ReflectionUtils.set(rootObject, element.getField(), value);
+            for (ClassNode child : node.getElements()) {
+                Object value = newInstance(child);
+                ReflectionUtils.set(rootObject, child.getField(), value);
             }
             return rootObject;
         }

@@ -16,16 +16,9 @@ class PrimitiveValue implements Randomizable {
     private static final Random RND = new Random();
     private static final int MAX_INT = 100;
 
-    private Class<?> clazz;
-
-    public PrimitiveValue(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        Preconditions.assertThat(clazz.isPrimitive(), new IllegalArgumentException("Is not a primitive, class : " + clazz));
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
         switch (clazz.toString()) {
             case "byte":
                 return (byte) (RND.nextInt(Byte.MAX_VALUE) & 0xFF);

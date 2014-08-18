@@ -1,38 +1,23 @@
 package org.randbean.values;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 
 class RandomizedJdkObject implements Randomizable {
 
-    private Class<?> clazz;
-
-    public RandomizedJdkObject(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
-        Randomizable value = new NullValue();
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
 
-        if (String.class.equals(clazz)) {
-            value = new RandomizedString();
+        if( Map.class.isAssignableFrom(clazz) ) return new RandomizedMap().instantiate(clazz, followReferences);
+        if( Set.class.isAssignableFrom(clazz) ) return new RandomizedSet().instantiate(clazz, followReferences);
+        if( List.class.isAssignableFrom(clazz) ) return new RandomizedList().instantiate(clazz, followReferences);
 
-        } else if (Date.class.isAssignableFrom(clazz)) {
-            value = new RandomizedDate(clazz);
-
-        } else if (Map.class.isAssignableFrom(clazz)) {
-            value = new RandomizedMap(clazz);
-
-        } else if (Collection.class.isAssignableFrom(clazz)) {
-            value = new RandomizedCollection(clazz);
-
-        }
-        return value.generate();
+        return null;
+        
     }
 }

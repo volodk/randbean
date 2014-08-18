@@ -11,7 +11,7 @@ import org.randbean.utils.Preconditions;
  */
 public class Explorer {
 
-    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "2"));
+    private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "5"));
 
     public static ClassNode explore(Class<?> clazz) {
         Preconditions.notNull(clazz);

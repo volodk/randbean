@@ -1,18 +1,15 @@
 package org.randbean.values;
 
 import org.randbean.types.Randomizable;
+import org.randbean.utils.Preconditions;
 
 // volodymyr_krasnikov1 <vkrasnikov@gmail.com> 2:36:05 PM 
 
 class RandomizedMap implements Randomizable {
 
-    public RandomizedMap(Class<?> clazz) {
-        // TODO Auto-generated constructor stub
-    }
-
     @Override
-    public Object generate() {
-        // TODO Auto-generated method stub
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
         return null;
     }
 

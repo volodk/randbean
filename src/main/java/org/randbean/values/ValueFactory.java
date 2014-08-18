@@ -1,31 +1,90 @@
 package org.randbean.values;
 
-import org.randbean.core.ClassNode;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.randbean.core.JdkClasses;
 import org.randbean.types.Randomizable;
 
 public class ValueFactory {
     
-    public static Randomizable resolve(ClassNode s){
-        return resolve(s.getClassType());
+    private static interface Condition {
+        boolean canInstantiate(Class<?> clazz);
     }
-	
+    
+    private static final Map<Condition, Randomizable> factories = new LinkedHashMap<>();
+    
+    static {
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return clazz.isPrimitive();
+            }
+        }, new PrimitiveValue());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return String.class.isAssignableFrom(clazz);
+            }
+        }, new RandomizedString());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return clazz.isArray();
+            }
+        }, new RandomizedArray());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return clazz.isEnum();
+            }
+        }, new RandomizedEnum());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return Date.class.isAssignableFrom(clazz);
+            }
+        }, new RandomizedDate());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return JdkClasses.isKnown(clazz);
+            }
+        }, new RandomizedJdkObject());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                // is plain java bean in our classpath 
+                return true;
+            }
+        }, new RandomizedJavaBean());
+        
+        add( new Condition() {
+            @Override
+            public boolean canInstantiate(Class<?> clazz) {
+                return clazz.isInterface();
+            }
+        }, new ProxiedObject());
+    }
+    
+    private static void add(Condition cond, Randomizable generator){
+        factories.put(cond, generator);
+    }
+    
     public static Randomizable resolve(Class<?> clazz){
-	    if( clazz != null ){
-	        if( clazz.isPrimitive() ){
-	            return new org.randbean.values.PrimitiveValue(clazz);
-	        } else if( clazz.isArray() ){
-                return new org.randbean.values.RandomizedArray(clazz);
-	        } else if( clazz.isEnum() ){
-	            return new org.randbean.values.RandomizedEnum(clazz);
-	        } else if( clazz.isInterface() ){
-                return new ProxiedObject(clazz);
-            } else if( JdkClasses.isKnown(clazz) ){
-	            return new RandomizedJdkObject(clazz);
-	        } else 
-	            return new RandomizedJavaBean(clazz);
-	    }
-		return new NullValue();
-	}
+        for( Condition c : factories.keySet() ){
+            if(c.canInstantiate(clazz))
+                return factories.get(c);
+        }
+        return new NullValue();
+    }
 
 }

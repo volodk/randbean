@@ -4,19 +4,17 @@ import org.randbean.core.Builder;
 import org.randbean.core.Explorer;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
+import org.randbean.utils.ReflectionUtils;
 
 class RandomizedJavaBean implements Randomizable{
 
-    private Class<?> clazz;
-    
-    public RandomizedJavaBean(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
-        return Builder.newInstance( Explorer.explore(clazz) );
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
+        if ( followReferences )
+            return Builder.newInstance( Explorer.explore(clazz) );
+        else 
+            return ReflectionUtils.newInstance(clazz);
     }
 
 }

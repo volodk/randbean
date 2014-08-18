@@ -8,17 +8,9 @@ import org.randbean.utils.Preconditions;
 
 class RandomizedEnum implements Randomizable {
     
-    private Class<?> clazz;
-
-    public RandomizedEnum(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        Preconditions.assertThat(clazz.isEnum(), new IllegalArgumentException(
-                "Unsupported classtype, class : " + clazz));
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
         return ArrayUtils.randomElement(clazz.getEnumConstants());
     }
 }

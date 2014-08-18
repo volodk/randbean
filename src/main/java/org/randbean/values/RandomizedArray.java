@@ -1,5 +1,6 @@
 package org.randbean.values;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -12,18 +13,10 @@ class RandomizedArray implements Randomizable {
     private static final Random RND = new Random();
     private static final int MAX_DIMENTION_SIZE = Integer.parseInt(System.getProperty("arrays.max.size", "5"));
 
-    private Class<?> clazz;
-
-    public RandomizedArray(Class<?> clazz) {
-        Preconditions.notNull(clazz);
-        Preconditions.assertThat(clazz.isArray(), new IllegalArgumentException("Unsupported classtype, class : "
-                + clazz));
-        this.clazz = clazz;
-    }
-
     @Override
-    public Object generate() {
-
+    public Object instantiate(Class<?> clazz, boolean followReferences) {
+        Preconditions.notNull(clazz);
+        
         int d = ArrayUtils.countArrayDimensions(clazz);
         int[] dimensions = new int[d];
         int i = d;
@@ -32,22 +25,21 @@ class RandomizedArray implements Randomizable {
         }
 
         Class<?> componentType = ArrayUtils.getComponentType(clazz);
-
         Randomizable rv = ValueFactory.resolve(componentType);
-
-        return fill(componentType, rv, dimensions, 0, d);
+        
+        return fill(componentType, rv, dimensions, 0, d, followReferences);
     }
 
-    private Object fill(final Class<?> clazz, final Randomizable rv, int[] dimensions, int from, int to) {
+    private Object fill(final Class<?> clazz, final Randomizable rv, int[] dimensions, int from, int to, boolean followReferences) {
         if (from < to) {
-            Object array = java.lang.reflect.Array.newInstance(clazz, Arrays.copyOfRange(dimensions, from, to));
+            Object array = Array.newInstance(clazz, Arrays.copyOfRange(dimensions, from, to));
             for (int i = 0; i < dimensions[from]; i++) {
-                Object value = fill(clazz, rv, dimensions, from + 1, to);
-                java.lang.reflect.Array.set(array, i, value);
+                Object value = fill(clazz, rv, dimensions, from + 1, to, followReferences);
+                Array.set(array, i, value);
             }
             return array;
         } else {
-            return rv.generate();
+            return rv.instantiate(clazz, followReferences);
         }
     }
 
