@@ -2,6 +2,7 @@ package org.randbean.values;
 
 import java.util.Set;
 
+import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 
@@ -10,7 +11,7 @@ import org.randbean.utils.Preconditions;
 class RandomizedSet implements Randomizable {
 
     @Override
-    public Object instantiate(Class<?> clazz, boolean followReferences) {
+    public Object instantiate(Class<?> clazz, CreationMode mode) {
         Preconditions.notNull(clazz);
         
         if( clazz.equals(Set.class) ){

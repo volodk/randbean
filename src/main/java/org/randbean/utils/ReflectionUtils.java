@@ -6,6 +6,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.randbean.core.CreationMode;
+import org.randbean.types.Randomizable;
+import org.randbean.values.ValueFactory;
+
 /**
  * 
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
@@ -72,7 +76,15 @@ public class ReflectionUtils {
 
     private static Object createWithConstructor(Constructor<?> c) throws InstantiationException,
             IllegalAccessException, InvocationTargetException {
-        return c.newInstance(new Object[]{});
+        
+        Class<?>[] types = c.getParameterTypes();
+        int N = types.length;
+        Object[] params = new Object[N];
+        for(int i = 0; i < N; i++){
+            Randomizable r = ValueFactory.resolve(types[i]);
+            params[i] = r.instantiate(types[i], CreationMode.SHALLOW ); 
+        }
+        return c.newInstance(params);
     }
 
 }

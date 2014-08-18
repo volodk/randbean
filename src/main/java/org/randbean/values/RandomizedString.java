@@ -2,6 +2,7 @@ package org.randbean.values;
 
 import java.util.Random;
 
+import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 
@@ -17,7 +18,7 @@ class RandomizedString implements Randomizable {
     private static final int MAX_LENGTH = Integer.parseInt(System.getProperty("strings.max.size", "20"));
 
     @Override
-    public Object instantiate(Class<?> clazz, boolean followReferences) {
+    public Object instantiate(Class<?> clazz, CreationMode mode) {
         Preconditions.notNull(clazz);
         int length = 1 + RND.nextInt(MAX_LENGTH);
         char[] buff = new char[length];

@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.ArrayUtils;
 import org.randbean.utils.Preconditions;
@@ -14,7 +15,7 @@ class RandomizedArray implements Randomizable {
     private static final int MAX_DIMENTION_SIZE = Integer.parseInt(System.getProperty("arrays.max.size", "5"));
 
     @Override
-    public Object instantiate(Class<?> clazz, boolean followReferences) {
+    public Object instantiate(Class<?> clazz, CreationMode mode) {
         Preconditions.notNull(clazz);
         
         int d = ArrayUtils.countArrayDimensions(clazz);
@@ -27,19 +28,19 @@ class RandomizedArray implements Randomizable {
         Class<?> componentType = ArrayUtils.getComponentType(clazz);
         Randomizable rv = ValueFactory.resolve(componentType);
         
-        return fill(componentType, rv, dimensions, 0, d, followReferences);
+        return fill(componentType, rv, dimensions, 0, d, mode);
     }
 
-    private Object fill(final Class<?> clazz, final Randomizable rv, int[] dimensions, int from, int to, boolean followReferences) {
+    private Object fill(final Class<?> clazz, final Randomizable rv, int[] dimensions, int from, int to, CreationMode mode) {
         if (from < to) {
             Object array = Array.newInstance(clazz, Arrays.copyOfRange(dimensions, from, to));
             for (int i = 0; i < dimensions[from]; i++) {
-                Object value = fill(clazz, rv, dimensions, from + 1, to, followReferences);
+                Object value = fill(clazz, rv, dimensions, from + 1, to, mode);
                 Array.set(array, i, value);
             }
             return array;
         } else {
-            return rv.instantiate(clazz, followReferences);
+            return rv.instantiate(clazz, mode);
         }
     }
 

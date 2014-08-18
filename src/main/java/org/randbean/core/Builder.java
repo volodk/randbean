@@ -17,7 +17,7 @@ public class Builder {
         if (node.isLeaf()) {
             Class<?> clazz = node.getClassType();
             Randomizable r = ValueFactory.resolve(clazz);
-            return r.instantiate(clazz, false );
+            return r.instantiate(clazz, CreationMode.SHALLOW );
         } else {
             Class<?> rootObjectType = node.getClassType();
             Object rootObject = ReflectionUtils.newInstance(rootObjectType);
