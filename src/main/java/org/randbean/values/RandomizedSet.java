@@ -1,6 +1,9 @@
 package org.randbean.values;
 
+import java.util.HashSet;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
@@ -14,13 +17,35 @@ class RandomizedSet implements Randomizable {
     public Object instantiate(Class<?> clazz, CreationMode mode) {
         Preconditions.notNull(clazz);
         
-        if( clazz.equals(Set.class) ){
+        Object set = null;
+        
+        if( clazz.isInterface() ){
             
-        } else if( Set.class.isAssignableFrom(clazz) ){
+            if( clazz == Set.class) {
+                
+            }
             
+            if( clazz == SortedSet.class ){
+                
+            }
+            
+            if( clazz == NavigableSet.class ){
+                
+            }
+            
+        } else {
+            set = null;
         }
         
-        return null;
+        return set;
+    }
+    
+    public static void main(String[] args) {
+        Set<String> set = new HashSet<>();
+        
+        System.out.println( set.getClass().getName() );
+        System.out.println( set.getClass().getTypeParameters()[0].getName() );
+        
     }
 
 }

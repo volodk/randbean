@@ -31,23 +31,8 @@ public class ReflectionUtils {
         }
     }
 
-    public static void setIfNull(Object instance, Field field, Object value) {
-        try {
-            if (field.get(instance) == null) {
-                boolean wflag = field.isAccessible();
-                try {
-                    field.setAccessible(true);
-                    field.set(instance, value);
-                } finally {
-                    field.setAccessible(wflag);
-                }
-            }
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            System.err.println("Cannot set value, details : " + e.getMessage());
-        }
-    }
-
-    public static Object newInstance(Class<?> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> T newInstance(Class<T> clazz) {
         try {
             Constructor<?> c = null;
             int n = clazz.getConstructors().length;
@@ -66,7 +51,7 @@ public class ReflectionUtils {
                 c = clazz.getDeclaredConstructors()[0];
             }
 
-            return createWithConstructor(c);
+            return (T) createWithConstructor(c);
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();

@@ -7,15 +7,16 @@ import org.randbean.types.Randomizable;
 import org.randbean.utils.Preconditions;
 import org.randbean.utils.ReflectionUtils;
 
-class RandomizedJavaBean implements Randomizable{
+class RandomizedJavaBean implements Randomizable {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
         Preconditions.notNull(clazz);
-        if ( CreationMode.DEEP == mode )
-            return Builder.newInstance( Explorer.explore(clazz) );
-        else 
+        if (CreationMode.DEEP == mode) {
+            return Builder.newInstance(Explorer.explore(clazz));
+        } else {
             return ReflectionUtils.newInstance(clazz);
+        }
     }
 
 }
