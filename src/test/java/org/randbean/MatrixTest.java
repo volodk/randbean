@@ -5,8 +5,8 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.randbean.junit.RandomizeRunner;
 import org.randbean.junit.Randomize;
+import org.randbean.junit.RandomizeRunner;
 
 @RunWith(RandomizeRunner.class)
 public class MatrixTest {

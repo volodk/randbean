@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.randbean.junit.RandomizeRunner;
 import org.randbean.junit.Randomize;
+import org.randbean.junit.RandomizeRunner;
 import org.randbean.samplebeans.FullOfPrimitives;
 
 @RunWith(RandomizeRunner.class)

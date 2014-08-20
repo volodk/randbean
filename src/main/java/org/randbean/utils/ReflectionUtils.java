@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
@@ -33,41 +34,45 @@ public class ReflectionUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(Class<T> clazz) {
-        try {
-            Constructor<?> c = null;
-            int n = clazz.getConstructors().length;
-            if (n > 1) {
-                Constructor<?> constuctors[] = Arrays.copyOf(clazz.getConstructors(), n);
-                Arrays.sort(constuctors, new Comparator<Constructor<?>>() {
-                    @Override
-                    public int compare(Constructor<?> c1, Constructor<?> c2) {
-                        return c2.getGenericParameterTypes().length - c1.getGenericParameterTypes().length;
-                    }
-                });
-                c = constuctors[0];
-            } else if (n == 1) {
-                c = clazz.getConstructors()[0];
-            } else {
-                c = clazz.getDeclaredConstructors()[0];
+        Objects.requireNonNull(clazz);
+        if (!clazz.isInterface()) {
+            try {
+                Constructor<?> c = null;
+                int n = clazz.getConstructors().length;
+                if (n > 1) {
+                    Constructor<?> constuctors[] = Arrays.copyOf(clazz.getConstructors(), n);
+                    Arrays.sort(constuctors, new Comparator<Constructor<?>>() {
+                        @Override
+                        public int compare(Constructor<?> c1, Constructor<?> c2) {
+                            return c2.getGenericParameterTypes().length - c1.getGenericParameterTypes().length;
+                        }
+                    });
+                    c = constuctors[0];
+                } else if (n == 1) {
+                    c = clazz.getConstructors()[0];
+                } else {
+                    c = clazz.getDeclaredConstructors()[0];
+                }
+
+                return (T) createWithConstructor(c);
+
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
             }
-
-            return (T) createWithConstructor(c);
-
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
         }
         return null;
     }
 
     private static Object createWithConstructor(Constructor<?> c) throws InstantiationException,
             IllegalAccessException, InvocationTargetException {
-        
+
         Class<?>[] types = c.getParameterTypes();
         int N = types.length;
         Object[] params = new Object[N];
-        for(int i = 0; i < N; i++){
+        for (int i = 0; i < N; i++) {
             Randomizable r = ValueFactory.resolve(types[i]);
-            params[i] = r.instantiate(types[i], CreationMode.SHALLOW ); 
+            params[i] = r.instantiate(types[i], CreationMode.SHALLOW);
         }
         return c.newInstance(params);
     }

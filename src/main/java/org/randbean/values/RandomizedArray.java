@@ -2,12 +2,12 @@ package org.randbean.values;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
 import org.randbean.utils.ArrayUtils;
-import org.randbean.utils.Preconditions;
 
 class RandomizedArray implements Randomizable {
 
@@ -16,7 +16,7 @@ class RandomizedArray implements Randomizable {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
-        Preconditions.notNull(clazz);
+        Objects.requireNonNull(clazz);
         
         int d = ArrayUtils.countArrayDimensions(clazz);
         int[] dimensions = new int[d];

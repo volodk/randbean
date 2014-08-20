@@ -5,8 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.randbean.junit.Randomizer;
 import org.randbean.junit.Randomize;
+import org.randbean.junit.Randomizer;
 import org.randbean.samplebeans.Person;
 
 public class BeanOfBeanWithoutRunnerTest {

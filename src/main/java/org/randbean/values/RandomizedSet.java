@@ -2,12 +2,12 @@ package org.randbean.values;
 
 import java.util.HashSet;
 import java.util.NavigableSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 
 import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
-import org.randbean.utils.Preconditions;
 
 // volodymyr_krasnikov1 <vkrasnikov@gmail.com> 2:36:18 PM 
 
@@ -15,7 +15,7 @@ class RandomizedSet implements Randomizable {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
-        Preconditions.notNull(clazz);
+        Objects.requireNonNull(clazz);
         
         Object set = null;
         

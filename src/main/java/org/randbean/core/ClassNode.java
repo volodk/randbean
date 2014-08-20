@@ -4,8 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.randbean.utils.Preconditions;
+import java.util.Objects;
 
 /**
  * 
@@ -20,7 +19,7 @@ public class ClassNode {
     private List<ClassNode> elements = new LinkedList<>();
 
     public ClassNode(Class<?> clazz, Field field) {
-        Preconditions.notNull(clazz);
+        Objects.requireNonNull(clazz);
         this.clazz = clazz;
         this.f = field;
     }

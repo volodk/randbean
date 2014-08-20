@@ -1,10 +1,10 @@
 package org.randbean.values;
 
+import java.util.Objects;
 import java.util.Random;
 
 import org.randbean.core.CreationMode;
 import org.randbean.types.Randomizable;
-import org.randbean.utils.Preconditions;
 
 /**
  * 
@@ -19,7 +19,7 @@ class PrimitiveValue implements Randomizable {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
-        Preconditions.notNull(clazz);
+        Objects.requireNonNull(clazz);
         switch (clazz.toString()) {
             case "byte":
                 return (byte) (RND.nextInt(Byte.MAX_VALUE) & 0xFF);

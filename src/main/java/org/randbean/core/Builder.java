@@ -1,7 +1,8 @@
 package org.randbean.core;
 
+import java.util.Objects;
+
 import org.randbean.types.Randomizable;
-import org.randbean.utils.Preconditions;
 import org.randbean.utils.ReflectionUtils;
 import org.randbean.values.ValueFactory;
 
@@ -13,7 +14,7 @@ import org.randbean.values.ValueFactory;
 public class Builder {
 
     public static Object newInstance(ClassNode node) {
-        Preconditions.notNull(node);
+        Objects.requireNonNull(node);
         if (node.isLeaf()) {
             Class<?> clazz = node.getClassType();
             Randomizable r = ValueFactory.resolve(clazz);

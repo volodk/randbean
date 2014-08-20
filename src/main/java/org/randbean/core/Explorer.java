@@ -1,8 +1,7 @@
 package org.randbean.core;
 
 import java.lang.reflect.Field;
-
-import org.randbean.utils.Preconditions;
+import java.util.Objects;
 
 /**
  * 
@@ -14,18 +13,18 @@ public class Explorer {
     private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "5"));
 
     public static ClassNode explore(Class<?> clazz) {
-        Preconditions.notNull(clazz);
+        Objects.requireNonNull(clazz);
         return explore(clazz, null, 0);
     }
 
     public static ClassNode explore(Field field) {
-        Preconditions.notNull(field);
+        Objects.requireNonNull(field);
         return explore(field.getType(), field, 0);
     }
 
     public static ClassNode explore(Class<?> clazz, Field field) {
-        Preconditions.notNull(clazz);
-        Preconditions.notNull(field);
+        Objects.requireNonNull(clazz);
+        Objects.requireNonNull(field);
         return explore(clazz, field, 0);
     }
 
