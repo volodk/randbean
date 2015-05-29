@@ -12,35 +12,29 @@ public class Explorer {
 
     private static final int MAX_DEPTH = Integer.parseInt(System.getProperty("links.max.depth", "5"));
 
-    public static ClassNode explore(Class<?> clazz) {
+    public static Model explore(Class<?> clazz) {
         Objects.requireNonNull(clazz);
-        return explore(clazz, null, 0);
+        return explore(clazz, null, /*start depth*/ 0);
     }
 
-    public static ClassNode explore(Field field) {
+    public static Model explore(Field field) {
         Objects.requireNonNull(field);
-        return explore(field.getType(), field, 0);
+        return explore(field.getType(), field, /*start depth*/ 0);
     }
 
-    public static ClassNode explore(Class<?> clazz, Field field) {
-        Objects.requireNonNull(clazz);
-        Objects.requireNonNull(field);
-        return explore(clazz, field, 0);
-    }
-
-    private static ClassNode explore(Class<?> clazz, Field field, int depth) {
+    private static Model explore(Class<?> clazz, Field field, int depth) {
         if (depth > MAX_DEPTH) {
             return null;
         } else {
-            ClassNode node = ClassNode.from(clazz, field);
+            Model node = Model.of(clazz).declaredAt(field);
             if (isDirectlyInstantiable(clazz)) {
                 node.markAsLeaf();
             } else {
                 for (Field f : clazz.getDeclaredFields()) {
-                    ClassNode child = explore(f.getType(), f, depth + 1);
-                    if (child != null)
+                    Model child = explore(f.getType(), f, depth + 1);
+                    if (child != null) {
                         node.addElement(child);
-                    else {
+                    } else {
                         node.markAsLeaf();
                     }
                 }

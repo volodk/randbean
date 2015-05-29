@@ -11,24 +11,28 @@ import java.util.Objects;
  * @author "Volodymyr Krasnikov" <vkrasnikov@gmail.com>
  * 
  */
-public class ClassNode {
+public class Model {
 
     private boolean leaf;
     private Field f;
     private Class<?> clazz;
-    private List<ClassNode> elements = new LinkedList<>();
+    private List<Model> elements = new LinkedList<>();
 
-    public ClassNode(Class<?> clazz, Field field) {
+    private Model(Class<?> clazz) {
         Objects.requireNonNull(clazz);
         this.clazz = clazz;
-        this.f = field;
+    }
+    
+    public Model declaredAt(Field field){
+    	this.f = field;
+    	return this;
     }
 
-    public List<ClassNode> getElements() {
+    public List<Model> getElements() {
         return elements;
     }
 
-    public Field getField() {
+    public Field getDeclatedAt() {
         return f;
     }
 
@@ -48,7 +52,7 @@ public class ClassNode {
         leaf = true;
     }
 
-    public void addElement(ClassNode subElement) {
+    public void addElement(Model subElement) {
         elements.add(subElement);
     }
 
@@ -57,8 +61,8 @@ public class ClassNode {
         return "For class : " + clazz.getSimpleName();
     }
 
-    public static ClassNode from(Class<?> klass, Field field) {
-        return new ClassNode(klass, field);
+    public static Model of(Class<?> klass) {
+        return new Model(klass);
     }
 
 }

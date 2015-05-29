@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Random;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 
 /**
  * 
@@ -12,7 +11,7 @@ import org.randbean.types.Randomizable;
  * 
  */
 
-class RandomizedString implements Randomizable {
+class RandomizedString implements RandomizableValue {
 
     private static final Random RND = new Random();
     private static final int MAX_LENGTH = Integer.parseInt(System.getProperty("strings.max.size", "20"));

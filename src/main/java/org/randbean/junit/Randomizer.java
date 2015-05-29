@@ -3,6 +3,7 @@ package org.randbean.junit;
 import java.lang.reflect.Field;
 
 import org.randbean.core.Builder;
+import org.randbean.core.Model;
 import org.randbean.core.Explorer;
 import org.randbean.utils.ReflectionUtils;
 
@@ -13,13 +14,17 @@ public final class Randomizer {
     private Randomizer() {
     }
     
-    public static void populate(Object obj){
-        if( obj != null )
-            for( Field field: obj.getClass().getDeclaredFields() ){
-                if( field.isAnnotationPresent(Randomize.class) ){
-                    Object generatedValue = Builder.newInstance(Explorer.explore(field));
-                    ReflectionUtils.set(obj, field, generatedValue);
-                }
+    public static final void populate(Object obj){
+
+    	if( obj == null )
+        	return;
+        
+        for( Field field: obj.getClass().getDeclaredFields() ){
+            if( field.isAnnotationPresent(Randomize.class) ){
+                Model model = Explorer.explore(field);
+                Object generatedValue = Builder.newInstance(model);
+                ReflectionUtils.set(obj, field, generatedValue);
             }
+        }
     }
 }

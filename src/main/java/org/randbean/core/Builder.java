@@ -2,8 +2,7 @@ package org.randbean.core;
 
 import java.util.Objects;
 
-import org.randbean.types.Randomizable;
-import org.randbean.utils.ReflectionUtils;
+import org.randbean.values.RandomizableValue;
 import org.randbean.values.ValueFactory;
 
 /**
@@ -13,20 +12,23 @@ import org.randbean.values.ValueFactory;
  */
 public class Builder {
 
-    public static Object newInstance(ClassNode node) {
-        Objects.requireNonNull(node);
-        if (node.isLeaf()) {
-            Class<?> clazz = node.getClassType();
-            Randomizable r = ValueFactory.resolve(clazz);
-            return r.instantiate(clazz, CreationMode.SHALLOW );
-        } else {
-            Class<?> rootObjectType = node.getClassType();
-            Object rootObject = ReflectionUtils.newInstance(rootObjectType);
-            for (ClassNode child : node.getElements()) {
-                Object value = newInstance(child);
-                ReflectionUtils.set(rootObject, child.getField(), value);
-            }
-            return rootObject;
-        }
+    public static Object newInstance(Model model) {
+        Objects.requireNonNull(model);
+        
+        Class<?> clazz = model.getClassType();
+        
+        RandomizableValue r = ValueFactory.resolve(clazz);
+        
+        CreationMode mode = model.isLeaf() ? CreationMode.SHALLOW : CreationMode.DEEP;
+        
+        return r.instantiate(clazz, mode );
     }
 }
+
+//Class<?> rootObjectType = node.getClassType();
+//Object rootObject = ReflectionUtils.newInstance(rootObjectType);
+//for (ClassModel child : node.getElements()) {
+//    Object value = newInstance(child);
+//    ReflectionUtils.set(rootObject, child.getDeclatedAt(), value);
+//}
+//return rootObject;

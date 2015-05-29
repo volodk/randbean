@@ -3,11 +3,10 @@ package org.randbean.values;
 import java.util.Objects;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 
 // volodymyr_krasnikov1 <vkrasnikov@gmail.com> 1:52:56 PM 
 
-class ProxiedObject implements Randomizable {
+class ProxiedObject implements RandomizableValue {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {

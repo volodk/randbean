@@ -17,9 +17,14 @@ public class RandomizeRunner extends BlockJUnit4ClassRunner {
     }
 
     @Override
-	protected Statement methodInvoker(FrameworkMethod method, Object test) {
-        Randomizer.populate(test);
-		return super.methodInvoker(method, test);
+	protected Statement methodInvoker(final FrameworkMethod method, final Object test) {
+		return new Statement() {
+			@Override
+			public void evaluate() throws Throwable {
+				Randomizer.populate(test);
+				RandomizeRunner.this.methodInvoker(method, test);
+			}
+		};
 	}
-
+    
 }

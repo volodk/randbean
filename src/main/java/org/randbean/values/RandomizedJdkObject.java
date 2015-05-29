@@ -6,9 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 
-class RandomizedJdkObject implements Randomizable {
+class RandomizedJdkObject implements RandomizableValue {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {

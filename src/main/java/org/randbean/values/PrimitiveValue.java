@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Random;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 
 /**
  * 
@@ -12,10 +11,10 @@ import org.randbean.types.Randomizable;
  * 
  */
 
-class PrimitiveValue implements Randomizable {
+class PrimitiveValue implements RandomizableValue {
 
     private static final Random RND = new Random();
-    private static final int MAX_INT = 100;
+    private static final int MAX_INT = Integer.parseInt(System.getProperty("random.max.int", "100"));
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
@@ -42,6 +41,7 @@ class PrimitiveValue implements Randomizable {
             case "boolean":
                 return RND.nextBoolean();
             default:
+            	System.err.println("Unknown primitive type. Please check");
                 return null;
         }
     }

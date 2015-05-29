@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
+import org.randbean.values.RandomizableValue;
 import org.randbean.values.ValueFactory;
 
 /**
@@ -71,7 +71,7 @@ public class ReflectionUtils {
         int N = types.length;
         Object[] params = new Object[N];
         for (int i = 0; i < N; i++) {
-            Randomizable r = ValueFactory.resolve(types[i]);
+            RandomizableValue r = ValueFactory.resolve(types[i]);
             params[i] = r.instantiate(types[i], CreationMode.SHALLOW);
         }
         return c.newInstance(params);

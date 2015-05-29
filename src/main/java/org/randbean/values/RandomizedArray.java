@@ -6,10 +6,9 @@ import java.util.Objects;
 import java.util.Random;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 import org.randbean.utils.ArrayUtils;
 
-class RandomizedArray implements Randomizable {
+class RandomizedArray implements RandomizableValue {
 
     private static final Random RND = new Random();
     private static final int MAX_DIMENTION_SIZE = Integer.parseInt(System.getProperty("arrays.max.size", "5"));
@@ -26,12 +25,12 @@ class RandomizedArray implements Randomizable {
         }
 
         Class<?> componentType = ArrayUtils.getComponentType(clazz);
-        Randomizable rv = ValueFactory.resolve(componentType);
+        RandomizableValue rv = ValueFactory.resolve(componentType);
         
         return fill(componentType, rv, dimensions, 0, d, mode);
     }
 
-    private Object fill(final Class<?> clazz, final Randomizable rv, int[] dimensions, int from, int to, CreationMode mode) {
+    private Object fill(final Class<?> clazz, final RandomizableValue rv, int[] dimensions, int from, int to, CreationMode mode) {
         if (from < to) {
             Object array = Array.newInstance(clazz, Arrays.copyOfRange(dimensions, from, to));
             for (int i = 0; i < dimensions[from]; i++) {

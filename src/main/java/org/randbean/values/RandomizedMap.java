@@ -6,11 +6,10 @@ import java.util.Objects;
 import java.util.SortedMap;
 
 import org.randbean.core.CreationMode;
-import org.randbean.types.Randomizable;
 
 // volodymyr_krasnikov1 <vkrasnikov@gmail.com> 2:36:05 PM 
 
-class RandomizedMap implements Randomizable {
+class RandomizedMap implements RandomizableValue {
 
     @Override
     public Object instantiate(Class<?> clazz, CreationMode mode) {
