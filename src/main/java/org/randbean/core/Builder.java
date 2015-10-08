@@ -25,10 +25,3 @@ public class Builder {
     }
 }
 
-//Class<?> rootObjectType = node.getClassType();
-//Object rootObject = ReflectionUtils.newInstance(rootObjectType);
-//for (ClassModel child : node.getElements()) {
-//    Object value = newInstance(child);
-//    ReflectionUtils.set(rootObject, child.getDeclatedAt(), value);
-//}
-//return rootObject;
