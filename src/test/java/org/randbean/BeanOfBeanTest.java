@@ -16,7 +16,6 @@ public class BeanOfBeanTest {
 
   @Test
   public void test() {
-    
 	  assertNotNull(person);
 	  assertNotNull(person.getBestFriend());
 	  assertNotNull(person.getBestFriend().getBestFriend());
@@ -24,7 +23,5 @@ public class BeanOfBeanTest {
 	  assertNotNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend());
 	  
 	  System.out.println(person);
-	  
   }
-
 }

@@ -6,16 +6,20 @@ import java.util.Set;
 
 // Volodymyr_Krasnikov1 <vkrasnikov@gmail.com> 1:20:34 PM 
 
-public class AdvancedPerson {
+public class PersonEx {
+    
+    enum Sex {
+        MALE, FEMALE
+    }
     
     private String name;
     private int age;
-    private byte[] privateArray;
-    private AdvancedPerson bestFriend;
-    private AdvancedPerson[] neighbors;
-    private Set<AdvancedPerson> children;
+    private Sex sex;
+    private PersonEx bestFriend;
+    private PersonEx[] neighbors;
+    private Set<PersonEx> children;
     
-    public AdvancedPerson() {
+    public PersonEx() {
     }
 
     public String getName() {
@@ -34,41 +38,41 @@ public class AdvancedPerson {
         this.age = age;
     }
 
-    public byte[] getPrivateArray() {
-        return privateArray;
+    public Sex getSex() {
+        return sex;
+    }
+    
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
-    public void setPrivateArray(byte[] privateArray) {
-        this.privateArray = privateArray;
-    }
-
-    public AdvancedPerson getBestFriend() {
+    public PersonEx getBestFriend() {
         return bestFriend;
     }
 
-    public void setBestFriend(AdvancedPerson bestFriend) {
+    public void setBestFriend(PersonEx bestFriend) {
         this.bestFriend = bestFriend;
     }
     
-    public AdvancedPerson[] getNeighbors() {
+    public PersonEx[] getNeighbors() {
         return neighbors;
     }
 
-    public void setNeighbors(AdvancedPerson[] neighbors) {
+    public void setNeighbors(PersonEx[] neighbors) {
         this.neighbors = neighbors;
     }
 
-    public Set<AdvancedPerson> getChildren() {
+    public Set<PersonEx> getChildren() {
         return children;
     }
 
-    public void setChildren(Set<AdvancedPerson> children) {
+    public void setChildren(Set<PersonEx> children) {
         this.children = children;
     }
 
     @Override
     public String toString() {
-        return "AdvancedPerson [name=" + name + ", age=" + age + ", privateArray=" + Arrays.toString(privateArray)
+        return "AdvancedPerson [name=" + name + ", age=" + age + ", sex=" + sex
                 + ", bestFriend=" + bestFriend + ", neighbors=" + Arrays.toString(neighbors) + ", children=" + children
                 + "]";
     }

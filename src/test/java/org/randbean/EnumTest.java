@@ -15,13 +15,8 @@ public class EnumTest {
     
     @Test
     public void test() {
-
         Assert.assertNotNull(e);
-        
         Assert.assertTrue(e == E.A || e == E.B || e == E.C);
-        
         System.out.println(e);
-
     }
-
 }

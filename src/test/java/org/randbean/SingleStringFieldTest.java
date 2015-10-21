@@ -15,11 +15,8 @@ public class SingleStringFieldTest {
 
 	@Test
 	public void test() {
-
 		assertNotNull(str);
-
 		System.out.println(str);
-
 	}
 
 }

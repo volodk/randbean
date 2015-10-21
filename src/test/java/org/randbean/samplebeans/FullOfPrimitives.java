@@ -11,13 +11,20 @@ public class FullOfPrimitives {
     private long longValue;
     private float floatValue;
     private double doubleValue;
+    private boolean booleanValue;
     
     @Override
     public String toString() {
-        return "Primitives [byteValue=" + byteValue + ", shortValue="
-                + shortValue + ", charValue=" + charValue + ", intValue="
-                + intValue + ", longValue=" + longValue + ", floatValue="
-                + floatValue + ", doubleValue=" + doubleValue + "]";
+        return "Primitives ["
+                + "byteValue=" + byteValue + ", "
+                + "shortValue=" + shortValue + ", "
+                + "charValue=" + charValue + ", "
+                + "intValue=" + intValue + ", "
+                + "longValue=" + longValue + ", "
+                + "floatValue=" + floatValue + ", "
+                + "doubleValue=" + doubleValue + ", "
+                + "booleanValue=" + booleanValue 
+                + "]";
     }
 
     public byte getByteValue() {
@@ -48,5 +55,8 @@ public class FullOfPrimitives {
         return doubleValue;
     }
     
+    public boolean isBooleanValue() {
+        return booleanValue;
+    }
     
 }

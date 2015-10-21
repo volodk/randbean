@@ -15,9 +15,7 @@ public class SinglePrimitiveTest {
     @Test
     public void test() {
         System.out.println(value);
-        
         byte DEFAULT_VALUE = 0;
-        
         Assert.assertTrue(value != DEFAULT_VALUE);  // might fail with probability P(A) = 1/256
     }
 

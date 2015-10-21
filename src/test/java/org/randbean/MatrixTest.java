@@ -18,23 +18,20 @@ public class MatrixTest {
     int space[][][];
 
     @Test
-    public void test() {
-
+    public void test2DArray() {
         Assert.assertNotNull(plane);
-
         for (int[] line : plane) {
             System.out.println(Arrays.toString(line));
         }
-
-        System.out.println();
-
+    }
+    
+    @Test
+    public void test3DArray() {
         Assert.assertNotNull(space);
-
         for (int[][] slice : space) {
             for (int[] line : slice) {
                 System.out.println(Arrays.toString(line));
             }
         }
     }
-
 }

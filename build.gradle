@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = '1.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+	testCompile 'junit:junit:4.12+'	
+}
+
+repositories {
+	mavenCentral()
+}

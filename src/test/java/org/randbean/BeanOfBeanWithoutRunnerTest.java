@@ -20,7 +20,6 @@ public class BeanOfBeanWithoutRunnerTest {
 
   @Test
   public void test() {
-    
       assertNotNull(person);
       assertNotNull(person.getBestFriend());
       assertNotNull(person.getBestFriend().getBestFriend());
@@ -28,7 +27,5 @@ public class BeanOfBeanWithoutRunnerTest {
       assertNotNull(person.getBestFriend().getBestFriend().getBestFriend().getBestFriend());
       
 	  System.out.println(person);
-	  
   }
-
 }
